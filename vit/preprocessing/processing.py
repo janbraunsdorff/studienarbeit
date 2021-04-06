@@ -120,7 +120,5 @@ def img_to_tensor(base_path):
 
 
 def create_date_point(id, age, path, sex):
-    print(sex, end='\r')
-    sys.stdout.flush()
     point = (img_to_tensor(path + str(id) + ".png"), float(age), sex)
     return point

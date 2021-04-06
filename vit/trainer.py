@@ -28,7 +28,7 @@ class Trainer():
             y = y.to(conf.device)
             z = z.to(conf.device)
 
-            out = self.model(x)
+            out = self.model(x, z)
             out = out.reshape(list(out.size())[0])
             loss = nn.MSELoss()(out, y.float()) 
 
@@ -87,7 +87,7 @@ class Trainer():
             y = y.to(conf.device)
             z = z.to(conf.device)
 
-            out = self.model(x)
+            out = self.model(x, z)
             loss = nn.MSELoss()(out, y.float()) 
 
             out = out.cpu()

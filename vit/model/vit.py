@@ -10,7 +10,7 @@ class ViT(nn.Module):
         super(ViT, self).__init__()
         self.patches = Patches(patch_size=conf.patch_size)
         self.encode_patches = PatchEncoder(num_patches=conf.num_patches, project_dim=conf.project_dim)
-        self.norm_1 = nn.BatchNorm1d(num_features=144, eps=1e-6)
+        self.norm_1 = nn.BatchNorm1d(num_features=256, eps=1e-6)
         self.flatten = nn.Flatten()
         self.drop = nn.Dropout(p=0.5)
 

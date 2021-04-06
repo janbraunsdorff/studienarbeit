@@ -22,10 +22,11 @@ class Trainer():
         eps = []
         sum = 0
         for batch in self.train_data:
-            x , y = batch
+            x , y , z = batch
             sum += x.shape[0]
             x = x.to(conf.device)
             y = y.to(conf.device)
+            z = z.to(conf.device)
 
             out = self.model(x)
             out = out.reshape(list(out.size())[0])
@@ -37,6 +38,7 @@ class Trainer():
 
             x = x.cpu()
             y = y.cpu()
+            z = z.cpu()
             out = out.cpu()
 
             acc = self.accuracy(out, y)
@@ -79,10 +81,11 @@ class Trainer():
         self.model.eval()
         eps = []
         for batch in self.val_data:
-            x, y = batch
+            x, y, z = batch
 
             x = x.to(conf.device)
             y = y.to(conf.device)
+            z = z.to(conf.device)
 
             out = self.model(x)
             loss = nn.MSELoss()(out, y.float()) 
@@ -90,6 +93,7 @@ class Trainer():
             out = out.cpu()
             x = x.cpu()
             y = y.cpu()
+            z = z.cpu()
 
             acc = self.accuracy(out, y)
             c4 = self.correct(out, y, 4)

@@ -38,7 +38,7 @@ class ViT(nn.Module):
             self.transformers.append(Transformer(conf.patch_size))
 
 
-    def forward(self, x):
+    def forward(self, x, sex):
         # x =  B x 3 x 72 x 72
         aug = augmentation.data_augmentation(x)
         # aug = B x 3 x 72 x 72
@@ -67,7 +67,7 @@ class ViT(nn.Module):
         y = self.mlp_drop_2(y)
 
 
-        x = torch.cat((x, y), 1)
+        x = torch.cat((y, sex), 1)
 
 
         x = self.relu(x)

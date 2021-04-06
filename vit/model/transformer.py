@@ -16,7 +16,6 @@ class Transformer(nn.Module):
 
 
     def forward(self, encoded_patches):
-        print(encoded_patches)
         print(encoded_patches.shape, self.norm_1)
         raise Exception('nö')
 

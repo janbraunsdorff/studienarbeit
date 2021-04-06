@@ -46,7 +46,7 @@ class Trainer():
             c4 = self.correct(out, y, 4)
             c12 = self.correct(out, y, 12)
             c24 = self.correct(out, y, 24)
-            eps.append({'val_loss': loss.item(), 'val_acc': acc.item(), 'c4' : c4, 'c12' : c12,'c24' : c24})
+            eps.append({'val_loss': loss.item(), 'val_acc': acc.item(), 'c4' : c4.item(), 'c12' : c12.item(),'c24' : c24.item()})
 
 
             batch_losses = [x['val_loss'] for x in eps]
@@ -102,7 +102,7 @@ class Trainer():
             c4 = self.correct(out, y, 4)
             c12 = self.correct(out, y, 12)
             c24 = self.correct(out, y, 24)
-            eps.append({'val_loss': loss.item(), 'val_acc': acc.item(), 'c4' : c4, 'c12' : c12,'c24' : c24})
+            eps.append({'val_loss': loss.item(), 'val_acc': acc.item(), 'c4' : c4.item(), 'c12' : c12.item(),'c24' : c24.item()})
 
 
         batch_losses = [x['val_loss'] for x in eps]

@@ -18,10 +18,16 @@ class Trainer():
         self.val_data = val_data
 
     def fit(self):
+        best_score = 0
         for i in range(conf.num_epoch):
             epoch_loss_train, epoch_acc_train = self.train(i)
-            epoch_loss_val, epoch_acc_val = self.eval()
+            epoch_loss_val, epoch_acc_val, score = self.eval()
             self.history.append((epoch_loss_train, epoch_acc_train, epoch_loss_val, epoch_acc_val))
+
+            if score > best_score:
+                print('save model...', end=' ')
+                torch.save(model, 'model/vit.pth')
+                print('**done**')
 
     def train(self, epoch):
         self.model.train()
@@ -70,7 +76,7 @@ class Trainer():
             c24 = np.sum(c24)
 
 
-            print('\rEpoche: {} [Learn] ({}/{}) loss: {:.4f}, acc: {:.4f}, c1: {:.2f}% c12: {:.2f}% c24: {:.2f}% score: {:.1f}'.format(epoch+1, index + 1, len(self.train_data),epoch_loss, epoch_acc, c4/126.11, c12/126.11, c24/126.11,(c4*2+c12+c24*0.5)/12611), end='')
+            print('\rEpoche: {} [Learn] ({}/{}) loss: {:.4f}, acc: {:.4f}, c1: {:.2f}% c12: {:.2f}% c24: {:.2f}% score: {:.4f}'.format(epoch+1, index + 1, len(self.train_data),epoch_loss, epoch_acc, c4/126.11, c12/126.11, c24/126.11,(c4*2+c12+c24*0.5)/12611.0), end='')
             sys.stdout.flush()
         end = time.time()
 
@@ -87,7 +93,7 @@ class Trainer():
         c24 = np.sum(c24)
         self.sheduler.step(c4*2+c12+c24*0.5)
 
-        print("\rEpoche: {} [Done] {} loss: {:.4f}, acc: {:.4f}, c1: {:.2f}% c12: {:.2f}% c24: {:.2f}% score: {:.2f}".format(epoch+1, time.strftime('%M:%S', time.gmtime(end - start)), epoch_loss, epoch_acc, c4/126.11, c12/126.11, c24/126.11, (c4*2+c12+c24*0.5)/12611), end=' | ')
+        print("\rEpoche: {} [Done] {} loss: {:.4f}, acc: {:.4f}, c1: {:.2f}% c12: {:.2f}% c24: {:.2f}% score: {:.4f}".format(epoch+1, time.strftime('%M:%S', time.gmtime(end - start)), epoch_loss, epoch_acc, c4/126.11, c12/126.11, c24/126.11, (c4*2+c12+c24*0.5)/12611.0), end=' | ')
         sys.stdout.flush()
 
         return epoch_loss, epoch_acc
@@ -130,11 +136,11 @@ class Trainer():
         c12 = np.sum(c12)
         c24 = [x['c24'] for x in eps]
         c24 = np.sum(c24)
-        print("[Test] loss: {:.4f}, acc: {:.4f}, c1: {:.2}% c12: {:.2f}% c24: {:.2f}% score: {:.2f}".format(epoch_loss, epoch_acc, c4/14.25, c12/14.25, c24/14.25, (c4*2+c12+c24*0.5) / 1425))
+        print("[Test] loss: {:.4f}, acc: {:.4f}, c1: {:.2}% c12: {:.2f}% c24: {:.2f}% score: {:.4f}".format(epoch_loss, epoch_acc, c4/14.25, c12/14.25, c24/14.25, (c4*2+c12+c24*0.5) / 1425.0))
         sys.stdout.flush()
 
 
-        return epoch_loss, epoch_acc
+        return epoch_loss, epoch_acc, (c4*2+c12+c24*0.5)
 
     def correct(self, out, lbl, trashold):
         out = torch.round(out)

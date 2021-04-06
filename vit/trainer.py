@@ -59,7 +59,7 @@ class Trainer():
             out = self.model(x)
             loss = nn.CrossEntropyLoss()(out, y)
 
-            out.cpu()
+            out = out.cpu()
             x = x.cpu()
             y = y.cpu()
 

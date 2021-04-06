@@ -32,6 +32,7 @@ class PatchEncoder (nn.Module):
     # patch = B x 144 x 108
     positions =  torch.arange(start=0, end=self.num_patches, step=1).to(conf.device)
     # positions = 144
+    print(patch.shape)
     p1 = self.projection(patch)
     # p1 = B x 144 x 64
     p2 = self.prostional_embedding(positions)

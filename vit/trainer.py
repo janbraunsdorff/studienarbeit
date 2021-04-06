@@ -56,7 +56,7 @@ class Trainer():
 
             out = self.model(x)
             loss = nn.CrossEntropyLoss()(out, y)
-            acc = accuracy(out, y)
+            acc = self.accuracy(out, y)
             eps.append({'val_loss': loss.item(), 'val_acc': acc.item()})
 
             x = x.cpu()

@@ -20,9 +20,9 @@ class ViT(nn.Module):
         self.mlp_drop_2 = nn.Dropout(p=0.1)
 
         self.activate = nn.GELU()
-        self.dense32 = nn.Linear(in_features=1, out_features=64)
+        self.dense32 = nn.Linear(in_features=1, out_features=128)
 
-        self.dense1000_1 = nn.Linear(1024+64, 1000)
+        self.dense1000_1 = nn.Linear(1024+128, 1000)
         self.dense1000_2 = nn.Linear(1000, 1000)
         self.dense1000_4 = nn.Linear(1000, 1)
 

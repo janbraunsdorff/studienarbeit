@@ -66,7 +66,7 @@ class Trainer():
             c24 = [x['c24'] for x in eps]
             c24 = np.sum(c24)
 
-            print('\rEpoche: {} [Training] ({}/{}) loss: {:.4f}, acc: {:.4f}, c1: {:.2f}% c12: {:.2f}% c24: {:.2f}%'.format(epoch+1, index + 1, len(self.train_data),epoch_loss, epoch_acc, c4/126.11, c12/126.11, c24/126.11), end='')
+            print('\rEpoche: {} [Training] ({}/{}) loss: {:.4f}, acc: {:.4f}, c1: {:.2f}% c12: {:.2f}% c24: {:.2f}% score: {:.1f}'.format(epoch+1, index + 1, len(self.train_data),epoch_loss, epoch_acc, c4/126.11, c12/126.11, c24/126.11, c4*2+c12+c24*0.5), end='')
 
         batch_losses = [x['val_loss'] for x in eps]
         epoch_loss = np.average(batch_losses)
@@ -79,9 +79,9 @@ class Trainer():
         c12 = np.sum(c12)
         c24 = [x['c24'] for x in eps]
         c24 = np.sum(c24)
-        self.sheduler.step(c4+c12+c24)
+        self.sheduler.step(c4*2+c12+c24*0.5)
 
-        print("\rEpoche: {} [Done] loss: {:.4f}, acc: {:.4f}, c1: {:.2f}% c12: {:.2f}% c24: {:.2f}%".format(epoch+1, epoch_loss, epoch_acc, c4/126.11, c12/126.11, c24/126.11), end=' | ')
+        print("\rEpoche: {} [Done] loss: {:.4f}, acc: {:.4f}, c1: {:.2f}% c12: {:.2f}% c24: {:.2f}% score: {:.1f}".format(epoch+1, epoch_loss, epoch_acc, c4/126.11, c12/126.11, c24/126.11, c4*2+c12+c24*0.5), end=' | ')
 
         return epoch_loss, epoch_acc
 
@@ -123,7 +123,7 @@ class Trainer():
         c12 = np.sum(c12)
         c24 = [x['c24'] for x in eps]
         c24 = np.sum(c24)
-        print("[Test] loss: {:.4f}, acc: {:.4f}, c1: {:.4f}% c12: {:.4f}% c24: {:.4f}%".format(epoch_loss, epoch_acc, c4/14.25, c12/14.25, c24/14.25))
+        print("[Test] loss: {:.4f}, acc: {:.4f}, c1: {:.4f}% c12: {:.4f}% c24: {:.4f}% score: {}".format(epoch_loss, epoch_acc, c4/14.25, c12/14.25, c24/14.25, c4*2+c12+c24*0.5))
 
         return epoch_loss, epoch_acc
 

@@ -39,6 +39,8 @@ class ViT(nn.Module):
 
 
     def forward(self, x, sex):
+        batch_size = x.shape[0]
+        assert x.shape == (batch_size, 1, 256, 256)
         # x =  B x 3 x 72 x 72
         x = x / 255.0
         # x =  B x 3 x 72 x 72

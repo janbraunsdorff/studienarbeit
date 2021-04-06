@@ -116,7 +116,7 @@ class Trainer():
         c12 = np.sum(c12)
         c24 = [x['c24'] for x in eps]
         c24 = np.sum(c24)
-        print("[Test] loss: {:.4f}, acc: {:.4f}, c1: {:.4f}% c12: {:.4f}% c24: {:.4f}%".format(epoch_loss, epoch_acc, c4/1425, c12/1425, c24/1425))
+        print("[Test] loss: {:.4f}, acc: {:.4f}, c1: {:.4f}% c12: {:.4f}% c24: {:.4f}%".format(epoch_loss, epoch_acc, c4/14.25, c12/14.25, c24/14.25))
 
         return epoch_loss, epoch_acc
 

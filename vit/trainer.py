@@ -8,7 +8,7 @@ class Trainer():
         self.model = model
         self.optim = torch.optim.AdamW(self.model.parameters(), lr=conf.lr)
         self.sheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
-            self.optim, mode='min', factor=0.7, patience=5, threshold=0.001, 
+            self.optim, mode='max', factor=0.7, patience=5, threshold=0.001, 
             threshold_mode='rel', cooldown=0, min_lr=0, eps=1e-10, verbose=True
         )
         self.history = []
@@ -51,7 +51,6 @@ class Trainer():
             c12 = self.correct(out, y, 12)
             c24 = self.correct(out, y, 24)
 
-            self.sheduler.step(c4+c12+c24)
             eps.append({'val_loss': loss.item(), 'val_acc': acc.item(), 'c4' : c4, 'c12' : c12,'c24' : c24})
 
 
@@ -66,7 +65,8 @@ class Trainer():
             c12 = np.sum(c12)
             c24 = [x['c24'] for x in eps]
             c24 = np.sum(c24)
-
+            
+            self.sheduler.step(c4+c12+c24)
             print('\rEpoche: {} [Training] ({}/{}) loss: {:.4f}, acc: {:.4f}, c1: {:.2f}% c12: {:.2f}% c24: {:.2f}%'.format(epoch+1, index + 1, len(self.train_data),epoch_loss, epoch_acc, c4/126.11, c12/126.11, c24/126.11), end='')
 
         batch_losses = [x['val_loss'] for x in eps]

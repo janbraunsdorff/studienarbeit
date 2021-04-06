@@ -13,11 +13,11 @@ class Trainer():
 
     def fit(self):
         for i in range(conf.num_epoch):
-            epoch_loss_train, epoch_acc_train = self.train()
+            epoch_loss_train, epoch_acc_train = self.train(i)
             epoch_loss_val, epoch_acc_val = self.eval()
             self.history.append((epoch_loss_train, epoch_acc_train, epoch_loss_val, epoch_acc_val))
 
-    def train(self):
+    def train(self, epoch):
         self.model.train()
         eps = []
         sum = 0
@@ -60,7 +60,7 @@ class Trainer():
             c24 = [x['c24'] for x in eps]
             c24 = np.sum(c24)
 
-            print('\r({}/{})[Training] loss: {:.4f}, acc: {:.4f}%, c1: {} c12: {} c24: {}'.format(index + 1, len(self.train_data),epoch_loss, epoch_acc, c4, c12, c24), end='')
+            print('\rEpoche: {} [Training] ({}/{}) loss: {:.4f}, acc: {:.4f}%, c1: {} c12: {} c24: {}'.format(epoch, index + 1, len(self.train_data),epoch_loss, epoch_acc, c4, c12, c24), end='')
 
         batch_losses = [x['val_loss'] for x in eps]
         epoch_loss = np.average(batch_losses)
@@ -80,6 +80,7 @@ class Trainer():
     def eval(self):
         self.model.eval()
         eps = []
+        sum = 0
         for batch in self.val_data:
             x, y, z = batch
 
@@ -100,20 +101,7 @@ class Trainer():
             c12 = self.correct(out, y, 12)
             c24 = self.correct(out, y, 24)
             eps.append({'val_loss': loss.item(), 'val_acc': acc.item(), 'c4' : c4, 'c12' : c12,'c24' : c24})
-
-            batch_losses = [x['val_loss'] for x in eps]
-            epoch_loss = np.average(batch_losses)
-            batch_accs = [x['val_acc'] for x in eps]
-            epoch_acc = (np.sum(batch_accs) / sum) * 100.0
-
-            c4 = [x['c4'] for x in eps]
-            c4 = np.sum(c4)
-            c12 = [x['c12'] for x in eps]
-            c12 = np.sum(c12)
-            c24 = [x['c24'] for x in eps]
-            c24 = np.sum(c24)
-
-            print('\r[Test] loss: {:.4f}, acc: {:.4f}%, c1: {} c12: {} c24: {}'.format(epoch_loss, epoch_acc, c4, c12, c24), end='')
+            
 
         batch_losses = [x['val_loss'] for x in eps]
         epoch_loss = np.average(batch_losses)

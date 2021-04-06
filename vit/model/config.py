@@ -2,7 +2,7 @@ import torch
 
 lr = 1e-3
 weight_decay = 1e-4
-batch_szie = 224
+batch_szie = 200
 num_epoch = 100
 image_size = 72
 patch_size = 6

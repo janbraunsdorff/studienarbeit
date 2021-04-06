@@ -30,7 +30,7 @@ class PatchEncoder (nn.Module):
 
   def forward(self, patch):
     # patch = B x 144 x 108
-    positions =  torch.arange(start=0, end=self.num_patches, step=1).to(self.device)
+    positions =  torch.arange(start=0, end=self.num_patches, step=1).to(conf.device)
     # positions = 144
     p1 = self.projection(patch)
     # p1 = B x 144 x 64

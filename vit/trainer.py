@@ -25,7 +25,7 @@ class Trainer():
             x = x.to(conf.device)
             y = y.to(conf.device)
 
-            out = model(x)
+            out = self.model(x)
             loss = nn.CrossEntropyLoss()(out, y)
             acc = accuracy(out, y)
             eps.append({'val_loss': loss.item(), 'val_acc': acc.item()})
@@ -54,7 +54,7 @@ class Trainer():
             x = x.to(conf.device)
             y = y.to(conf.device)
 
-            out = model(x)
+            out = self.model(x)
             loss = nn.CrossEntropyLoss()(out, y)
             acc = accuracy(out, y)
             eps.append({'val_loss': loss.item(), 'val_acc': acc.item()})

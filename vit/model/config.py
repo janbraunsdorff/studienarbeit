@@ -1,8 +1,8 @@
 import torch
 
 lr = 1e-3
-weight_decay = 1e-4
-batch_szie = 112
+weight_decay = 1e-5
+batch_szie = 64
 num_epoch = 1000
 image_size = 256
 patch_size = 16
@@ -14,7 +14,7 @@ hidden_layers = [
     (project_dim*2, project_dim*2), 
     (project_dim*2, project_dim)
 ]
-transformer_layers = 8
+transformer_layers = 16
 mlp_head_units = [2048, 1024]
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")

@@ -55,6 +55,6 @@ train_loader, val_loader =  benchmark(load_data, path, conf.batch_szie)
 print('**done** \ncreate Trainer...', end='')
 trainer = Trainer(model, train_loader, val_loader)
 
-print('**done** \n fit...')
+print('**done** \nfit...')
 trainer.fit()
 print(trainer.history)

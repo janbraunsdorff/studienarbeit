@@ -12,7 +12,7 @@ class Patches(nn.Module):
   def forward(self, images):
     # 256, 3, 72, 72
     batch = images.size()[0]
-    patches = images.unfold(1, 3, 3).unfold(2, conf.patch_size, conf.patch_size).unfold(3, conf.patch_size, conf.patch_size)
+    patches = images.unfold(1, 1, 1).unfold(2, conf.patch_size, conf.patch_size).unfold(3, conf.patch_size, conf.patch_size)
     patches = patches.squeeze(1)
     patches = patches.resize(batch, 12*12 ,3 * conf.patch_size* conf.patch_size)
     return patches

@@ -10,7 +10,7 @@ class Trainer():
         self.model = model
         self.optim = torch.optim.AdamW(self.model.parameters(), lr=conf.lr)
         self.sheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
-            self.optim, mode='max', factor=0.7, patience=5, threshold=0.001, 
+            self.optim, mode='max', factor=0.8, patience=10, threshold=0.001, 
             threshold_mode='rel', cooldown=0, min_lr=0, eps=1e-10, verbose=True
         )
         self.history = []

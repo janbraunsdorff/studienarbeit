@@ -39,7 +39,8 @@ class ViT(nn.Module):
 
 
     def forward(self, x, sex):
-        print(x)
+        # x =  B x 3 x 72 x 72
+        x = x / 255.0
         # x =  B x 3 x 72 x 72
         aug = augmentation.data_augmentation(x)
         # aug = B x 3 x 72 x 72

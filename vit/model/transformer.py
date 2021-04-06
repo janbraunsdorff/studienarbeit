@@ -16,10 +16,6 @@ class Transformer(nn.Module):
 
 
     def forward(self, encoded_patches):
-        print(encoded_patches)
-        print(encoded_patches.shape, self.norm_1)
-        raise Exception('nö')
-
         x1 = self.norm_1(encoded_patches)
         attention_output = self.mha(x1,x1,x1)
         x2 = attention_output[0] + encoded_patches

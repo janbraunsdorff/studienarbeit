@@ -25,7 +25,7 @@ class Trainer():
             self.history.append((epoch_loss_train, epoch_acc_train, epoch_loss_val, epoch_acc_val))
 
             if score > best_score:
-                print('save model...', end=' ')
+                print(' | save model...', end=' ')
                 torch.save(self.model, 'model/vit.pth')
                 best_score = score
                 print('**done**')

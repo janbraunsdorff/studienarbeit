@@ -60,7 +60,7 @@ class Trainer():
             c24 = [x['c24'] for x in eps]
             c24 = np.sum(c24)
 
-            print('\rEpoche: {} [Training] ({}/{}) loss: {:.4f}, acc: {:.4f}%, c1: {:.2f}% c12: {:.2f}% c24: {:.2f}%'.format(epoch, index + 1, len(self.train_data),epoch_loss, epoch_acc, c4/126.11, c12/126.11, c24/126.11), end='')
+            print('\rEpoche: {} [Training] ({}/{}) loss: {:.4f}, acc: {:.4f}%, c1: {:.2f}% c12: {:.2f}% c24: {:.2f}%'.format(epoch+1, index + 1, len(self.train_data),epoch_loss, epoch_acc, c4/126.11, c12/126.11, c24/126.11), end='')
 
         batch_losses = [x['val_loss'] for x in eps]
         epoch_loss = np.average(batch_losses)
@@ -73,7 +73,7 @@ class Trainer():
         c12 = np.sum(c12)
         c24 = [x['c24'] for x in eps]
         c24 = np.sum(c24)
-        print("[Train] loss: {:.4f}, acc: {:.4f}, c1: {} c12: {} c24: {}".format(epoch_loss, epoch_acc, c4, c12, c24), end=' | ')
+        print("[Train] loss: {:.4f}, acc: {:.4f}, c1: {} c12: {} c24: {}".format(epoch_loss, epoch_acc, c4/126.11, c12/126.11, c24/126.11), end=' | ')
 
         return epoch_loss, epoch_acc
 
@@ -89,6 +89,7 @@ class Trainer():
             z = z.to(conf.device)
 
             out = self.model(x, z)
+            out = out.reshape(list(out.size())[0])
             loss = nn.MSELoss()(out, y.float()) 
 
             out = out.cpu()
@@ -114,7 +115,7 @@ class Trainer():
         c12 = np.sum(c12)
         c24 = [x['c24'] for x in eps]
         c24 = np.sum(c24)
-        print("[Test] loss: {:.4f}, acc: {:.4f}, c1: {} c12: {} c24: {}".format(epoch_loss, epoch_acc, c4, c12, c24))
+        print("[Test] loss: {:.4f}, acc: {:.4f}, c1: {} c12: {} c24: {}".format(epoch_loss, epoch_acc, c4/1425, c12/1425, c24/1425))
 
         return epoch_loss, epoch_acc
 

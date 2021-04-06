@@ -31,8 +31,8 @@ class Trainer():
             eps.append({'val_loss': loss.item(), 'val_acc': acc.item()})
 
             loss.backward()
-            optim.step()
-            optim.zero_grad()
+            self.optim.step()
+            self.optim.zero_grad()
 
             x = x.cpu()
             y = y.cpu()

@@ -86,7 +86,7 @@ class Trainer():
         c24 = np.sum(c24)
         self.sheduler.step(c4*2+c12+c24*0.5)
 
-        print("\rEpoche: {} [Done] {} loss: {:.4f}, acc: {:.4f}, c1: {:.2f}% c12: {:.2f}% c24: {:.2f}% score: {:.1f}".format(epoch+1, time.strftime('%H:%M:%S', time.gmtime(end - start)), epoch_loss, epoch_acc, c4/126.11, c12/126.11, c24/126.11, c4*2+c12+c24*0.5), end=' | ')
+        print("\rEpoche: {} [Done] {} loss: {:.4f}, acc: {:.4f}, c1: {:.2f}% c12: {:.2f}% c24: {:.2f}% score: {:.1f}".format(epoch+1, time.strftime('%M:%S', time.gmtime(end - start)), epoch_loss, epoch_acc, c4/126.11, c12/126.11, c24/126.11, c4*2+c12+c24*0.5), end=' | ')
 
         return epoch_loss, epoch_acc
 

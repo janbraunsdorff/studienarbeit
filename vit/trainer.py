@@ -26,7 +26,7 @@ class Trainer():
 
             if score > best_score:
                 print('save model...', end=' ')
-                torch.save(model, './model/vit.pth')
+                torch.save(self.model, 'model/vit.pth')
                 print('**done**')
 
     def train(self, epoch):

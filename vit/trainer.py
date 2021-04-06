@@ -57,6 +57,7 @@ class Trainer():
             batch_losses = [x['val_loss'] for x in eps]
             epoch_loss = np.average(batch_losses)
             batch_accs = [x['val_acc'] for x in eps]
+            print(sum)
             epoch_acc = (np.sum(batch_accs) / sum) * 100.0
 
             c4 = [x['c4'] for x in eps]

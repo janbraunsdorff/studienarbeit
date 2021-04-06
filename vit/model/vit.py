@@ -45,16 +45,16 @@ class ViT(nn.Module):
         aug = augmentation.data_augmentation(x)
         # aug = B x 3 x 72 x 72
         patches = self.patches(aug)
-        print(patches)
         # patch =  B x 144 x 108
-        encode_patches = self.encode_patches(patches)
+        p = self.encode_patches(patches)
+
         # encode_patches = B x 144 x 64
 
-        print('pre_tansformers', encode_patches.shape)
-        print(encode_patches)
+        print('pre_tansformers', p.shape)
+        print(p)
 
         for t in self.transformers:
-            encode_patches = t(encode_patches)
+            p = t(p)
         # encode_patches = B x 144 x 64 
 
         representation = self.norm_1(encode_patches)

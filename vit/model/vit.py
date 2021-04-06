@@ -42,6 +42,8 @@ class ViT(nn.Module):
         # x =  B x 3 x 72 x 72
         x = x / 255.0
         sex = sex / 1.0
+
+        print(x.dtpye, sex.dtype)
         # x =  B x 3 x 72 x 72
         aug = augmentation.data_augmentation(x)
         # aug = B x 3 x 72 x 72

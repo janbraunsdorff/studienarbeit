@@ -35,19 +35,22 @@ transform = transforms.Compose(
 #testset = torchvision.datasets.CIFAR100(root='./vit/data', train=False, download=True, transform=transform)
 #testloader = torch.utils.data.DataLoader(testset, batch_size=conf.batch_szie, shuffle=False)
 
-print("proccess images train", end=" ")
-benchmark(process_store_image_train, path_to_training_annotation, path_to_training_data, path)
-sys.stdout.flush()
-print("proccess images val", end=" ")
-benchmark(process_store_image_val, path_to_validation_annotation, path_to_validatoin_data, path)
-sys.stdout.flush()
+def pre():
+    print("proccess images train", end=" ")
+    benchmark(process_store_image_train, path_to_training_annotation, path_to_training_data, path)
+    sys.stdout.flush()
+    print("proccess images val", end=" ")
+    benchmark(process_store_image_val, path_to_validation_annotation, path_to_validatoin_data, path)
+    sys.stdout.flush()
+
+# pre()
 
 print('init model...', end=' ')
 model = ViT()
 model = model.to(conf.device) 
 print('**done** \n load data...', end=' ')
 
-train_loader, val_loader =  benchmark(load_data, path, conf.batch_size)
+train_loader, val_loader =  benchmark(load_data, path, conf.batch_szie)
 
 print('**done** \n create Trainer...', end=' ')
 trainer = Trainer(model, train_loader, val_loader)

@@ -65,8 +65,7 @@ class Trainer():
             c12 = np.sum(c12)
             c24 = [x['c24'] for x in eps]
             c24 = np.sum(c24)
-            
-            self.sheduler.step(c4+c12+c24)
+
             print('\rEpoche: {} [Training] ({}/{}) loss: {:.4f}, acc: {:.4f}, c1: {:.2f}% c12: {:.2f}% c24: {:.2f}%'.format(epoch+1, index + 1, len(self.train_data),epoch_loss, epoch_acc, c4/126.11, c12/126.11, c24/126.11), end='')
 
         batch_losses = [x['val_loss'] for x in eps]
@@ -80,6 +79,8 @@ class Trainer():
         c12 = np.sum(c12)
         c24 = [x['c24'] for x in eps]
         c24 = np.sum(c24)
+        self.sheduler.step(c4+c12+c24)
+
         print("\rEpoche: {} [Done] loss: {:.4f}, acc: {:.4f}, c1: {:.2f}% c12: {:.2f}% c24: {:.2f}%".format(epoch+1, epoch_loss, epoch_acc, c4/126.11, c12/126.11, c24/126.11), end=' | ')
 
         return epoch_loss, epoch_acc

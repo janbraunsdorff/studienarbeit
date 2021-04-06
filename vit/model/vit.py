@@ -43,6 +43,7 @@ class ViT(nn.Module):
         x = x / 255.0
         # x =  B x 3 x 72 x 72
         aug = augmentation.data_augmentation(x)
+        print(aug)
         # aug = B x 3 x 72 x 72
         patches = self.patches(aug)
         # patch =  B x 144 x 108

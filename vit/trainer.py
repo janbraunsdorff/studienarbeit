@@ -40,6 +40,7 @@ class Trainer():
             y = y.cpu()
             z = z.cpu()
             out = out.cpu()
+            loss = loss.cpu()
 
             acc = self.accuracy(out, y)
             c4 = self.correct(out, y, 4)
@@ -80,7 +81,6 @@ class Trainer():
     def eval(self):
         self.model.eval()
         eps = []
-        sum = 0
         for batch in self.val_data:
             x, y, z = batch
 
@@ -96,6 +96,7 @@ class Trainer():
             x = x.cpu()
             y = y.cpu()
             z = z.cpu()
+            loss.cpu()
 
             acc = self.accuracy(out, y)
             c4 = self.correct(out, y, 4)

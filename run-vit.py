@@ -48,11 +48,11 @@ def pre():
 print('init model...', end=' ')
 model = ViT()
 model = model.to(conf.device) 
-print('**done** \n load data...', end='')
+print('**done** \nload data...', end='')
 
 train_loader, val_loader =  benchmark(load_data, path, conf.batch_szie)
 
-print('**done** \n create Trainer...', end='')
+print('**done** \ncreate Trainer...', end='')
 trainer = Trainer(model, train_loader, val_loader)
 
 print('**done** \n fit...')

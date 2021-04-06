@@ -47,11 +47,7 @@ class ViT(nn.Module):
         patches = self.patches(aug)
         # patch =  B x 144 x 108
         encoding = self.encode_patches(patches)
-
-        # encode_patches = B x 144 x 64
-
-        print('pre_tansformers', encoding.shape)
-        print(encoding)
+        # encoding = B x 144 x 64
 
         for t in self.transformers:
             encoding = t(encoding)

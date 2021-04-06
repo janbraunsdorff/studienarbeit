@@ -5,7 +5,7 @@ data_augmentation = transforms.Compose(
     [
         transforms.Normalize((0.5), (0.5)),
         transforms.RandomHorizontalFlip(),
-        transforms.RandomRotation(degrees=0.2),
+        transforms.RandomRotation(degrees=0.4),
         transforms.RandomResizedCrop(size=(conf.image_size, conf.image_size))
     ]
 )

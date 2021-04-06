@@ -4,7 +4,7 @@ import torch.nn as nn
 import numpy as np
 
 class Trainer():
-    def __inint__(self, model, train_data, val_data):
+    def __init__(self, model, train_data, val_data):
         self.model = model
         self.optim = torch.optim.AdamW(self.model.parameters(), lr=conf.lr)
         self.history = []

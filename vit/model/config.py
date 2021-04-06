@@ -18,4 +18,4 @@ transformer_layers = 8
 mlp_head_units = [2048, 1024]
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-print(device)
+print('Device: ', device)

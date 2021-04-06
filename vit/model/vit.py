@@ -53,7 +53,7 @@ class ViT(nn.Module):
             encoding = t(encoding)
         # encode_patches = B x 144 x 64 
 
-        representation = self.norm_1(encode_patches)
+        representation = self.norm_1(encoding)
         # representation_1:  torch.Size([256, 144, 64])
         representation = self.flatten(representation)
         # representation_2:  torch.Size([256, 9216])

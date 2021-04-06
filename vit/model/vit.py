@@ -14,15 +14,15 @@ class ViT(nn.Module):
         self.flatten = nn.Flatten()
         self.drop = nn.Dropout(p=0.5)
 
-        self.mlp_layer_1 = nn.Linear(in_features=conf.project_dim * conf.num_patches, out_features=2048)
+        self.mlp_layer_1 = nn.Linear(in_features=conf.project_dim * conf.num_patches, out_features=4096)
         self.mlp_drop_1 = nn.Dropout(p=0.1)
-        self.mlp_layer_2 = nn.Linear(in_features=2048, out_features=1024)
+        self.mlp_layer_2 = nn.Linear(in_features=4096, out_features=2048)
         self.mlp_drop_2 = nn.Dropout(p=0.1)
 
         self.activate = nn.GELU()
-        self.dense32 = nn.Linear(in_features=1, out_features=128)
+        self.dense32 = nn.Linear(in_features=1, out_features=256)
 
-        self.dense1000_1 = nn.Linear(1024+128, 1000)
+        self.dense1000_1 = nn.Linear(2048+256, 1000)
         self.dense1000_2 = nn.Linear(1000, 1000)
         self.dense1000_4 = nn.Linear(1000, 1)
 

@@ -73,7 +73,7 @@ class Trainer():
         c12 = np.sum(c12)
         c24 = [x['c24'] for x in eps]
         c24 = np.sum(c24)
-        print("[Train] loss: {:.4f}, acc: {:.4f}, c1: {} c12: {} c24: {}".format(epoch_loss, epoch_acc, c4/126.11, c12/126.11, c24/126.11), end=' | ')
+        print("\rEpoche: {} [Train] loss: {:.4f}, acc: {:.4f}, c1: {:.2f}% c12: {:.2f}% c24: {:.2f}%".format(epoch+1, epoch_loss, epoch_acc, c4/126.11, c12/126.11, c24/126.11), end=' | ')
 
         return epoch_loss, epoch_acc
 
@@ -115,7 +115,7 @@ class Trainer():
         c12 = np.sum(c12)
         c24 = [x['c24'] for x in eps]
         c24 = np.sum(c24)
-        print("[Test] loss: {:.4f}, acc: {:.4f}, c1: {} c12: {} c24: {}".format(epoch_loss, epoch_acc, c4/1425, c12/1425, c24/1425))
+        print("[Test] loss: {:.4f}, acc: {:.4f}, c1: {:.4f}% c12: {:.4f}% c24: {:.4f}%".format(epoch_loss, epoch_acc, c4/1425, c12/1425, c24/1425))
 
         return epoch_loss, epoch_acc
 

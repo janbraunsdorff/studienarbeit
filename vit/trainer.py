@@ -7,6 +7,10 @@ class Trainer():
     def __init__(self, model, train_data, val_data):
         self.model = model
         self.optim = torch.optim.AdamW(self.model.parameters(), lr=conf.lr)
+        self.sheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
+            self.optim, mode='min', factor=0.7, patience=5, threshold=0.001, 
+            threshold_mode='rel', cooldown=0, min_lr=0, eps=1e-10, verbose=True
+        )
         self.history = []
         self.train_data = train_data
         self.val_data = val_data
@@ -46,6 +50,8 @@ class Trainer():
             c4 = self.correct(out, y, 4)
             c12 = self.correct(out, y, 12)
             c24 = self.correct(out, y, 24)
+
+            self.sheduler.step(c4+c12+c24)
             eps.append({'val_loss': loss.item(), 'val_acc': acc.item(), 'c4' : c4, 'c12' : c12,'c24' : c24})
 
 

@@ -60,7 +60,7 @@ class Trainer():
             c24 = [x['c24'] for x in eps]
             c24 = np.sum(c24)
 
-            print('\r({}/{})[Training] loss: {:.4f}, acc: {:.4f}%, c1: {} c12: {} c24: {}'.format(index + 1, len(train_data),epoch_loss, epoch_acc, c4, c12, c24), end='')
+            print('\r({}/{})[Training] loss: {:.4f}, acc: {:.4f}%, c1: {} c12: {} c24: {}'.format(index + 1, len(self.train_data),epoch_loss, epoch_acc, c4, c12, c24), end='')
 
         batch_losses = [x['val_loss'] for x in eps]
         epoch_loss = np.average(batch_losses)

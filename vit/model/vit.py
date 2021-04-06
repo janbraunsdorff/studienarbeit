@@ -69,6 +69,7 @@ class ViT(nn.Module):
         y = self.mlp_drop_2(y)
 
 
+        sex = self.dense32(sex)
         print(y.shape, sex.shape)
         x = torch.cat((y, sex), 1)
 

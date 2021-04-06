@@ -41,7 +41,7 @@ class ViT(nn.Module):
     def forward(self, x, sex):
         # x =  B x 3 x 72 x 72
         x = x / 255.0
-        sex = sex / 1.0
+        sex = sex.float()
 
         print(x.dtype, sex.dtype)
         # x =  B x 3 x 72 x 72

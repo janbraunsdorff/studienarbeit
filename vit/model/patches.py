@@ -12,9 +12,9 @@ class Patches(nn.Module):
   def forward(self, images):
     # 256, 3, 72, 72
     batch = images.size()[0]
-    patches = images.unfold(1, 3, 3).unfold(2, self.patch_size, self.patch_size).unfold(3, self.patch_size, self.patch_size)
+    patches = images.unfold(1, 3, 3).unfold(2, conf.patch_size, conf.patch_size).unfold(3, conf.patch_size, conf.patch_size)
     patches = patches.squeeze(1)
-    patches = patches.resize(batch, 12*12 ,3 * self.patch_size* self.patch_size)
+    patches = patches.resize(batch, 12*12 ,3 * conf.patch_size* conf.patch_size)
     return patches
 
 
@@ -24,7 +24,7 @@ class PatchEncoder (nn.Module):
     self.num_patches = num_patches
     self.projection = nn.Linear(in_features=108, out_features=project_dim)
     self.prostional_embedding = nn.Embedding(num_embeddings=144, embedding_dim=project_dim)
-    self.to(self.device)
+    self.to(conf.device)
 
 
 

@@ -27,8 +27,6 @@ class Trainer():
 
             out = self.model(x)
             loss = nn.CrossEntropyLoss()(out, y)
-            acc = self.accuracy(out, y)
-            eps.append({'val_loss': loss.item(), 'val_acc': acc.item()})
 
             loss.backward()
             self.optim.step()
@@ -36,6 +34,10 @@ class Trainer():
 
             x = x.cpu()
             y = y.cpu()
+            out = out.cpu()
+
+            acc = self.accuracy(out, y)
+            eps.append({'val_loss': loss.item(), 'val_acc': acc.item()})
 
         batch_losses = [x['val_loss'] for x in eps]
         epoch_loss = np.average(batch_losses)
@@ -56,11 +58,13 @@ class Trainer():
 
             out = self.model(x)
             loss = nn.CrossEntropyLoss()(out, y)
-            acc = self.accuracy(out, y)
-            eps.append({'val_loss': loss.item(), 'val_acc': acc.item()})
 
+            out.cpu()
             x = x.cpu()
             y = y.cpu()
+
+            acc = self.accuracy(out, y)
+            eps.append({'val_loss': loss.item(), 'val_acc': acc.item()})
 
         batch_losses = [x['val_loss'] for x in eps]
         epoch_loss = np.average(batch_losses)

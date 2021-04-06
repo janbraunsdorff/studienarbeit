@@ -43,7 +43,7 @@ class ViT(nn.Module):
         x = x / 255.0
         sex = sex.float()
         # x =  B x 3 x 72 x 72
-        # aug = augmentation.data_augmentation(x)
+        aug = augmentation.data_augmentation(x)
         # aug = B x 3 x 72 x 72
         patches = self.patches(x)
         # patch =  B x 144 x 108

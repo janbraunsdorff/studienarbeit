@@ -24,10 +24,13 @@ class Trainer():
             epoch_loss_val, epoch_acc_val, score = self.eval()
             self.history.append((epoch_loss_train, epoch_acc_train, epoch_loss_val, epoch_acc_val))
 
+            print(score, ' >', best_score, 'score > best_score')
             if score > best_score:
                 print('save model...', end=' ')
                 torch.save(self.model, 'model/vit.pth')
+                best_score = score
                 print('**done**')
+            sys.stdout.flush()
 
     def train(self, epoch):
         self.model.train()
@@ -140,7 +143,7 @@ class Trainer():
         sys.stdout.flush()
 
 
-        return epoch_loss, epoch_acc, (c4*2+c12+c24*0.5)
+        return epoch_loss, epoch_acc, c4*2+c12+c24*0.5
 
     def correct(self, out, lbl, trashold):
         out = torch.round(out)

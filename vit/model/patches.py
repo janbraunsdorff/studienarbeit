@@ -14,7 +14,7 @@ class Patches(nn.Module):
     batch = images.size()[0]
     patches = images.unfold(1, 1, 1).unfold(2, conf.patch_size, conf.patch_size).unfold(3, conf.patch_size, conf.patch_size)
     patches = patches.squeeze(1)
-    patches = patches.resize(batch, 12*12 ,3 * conf.patch_size* conf.patch_size)
+    patches = patches.resize(batch, conf.num_patches, conf.patch_size* conf.patch_size)
     return patches
 
 

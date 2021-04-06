@@ -70,7 +70,7 @@ class Trainer():
             c24 = np.sum(c24)
 
 
-            print('\rEpoche: {} [Training] ({}/{}) loss: {:.4f}, acc: {:.4f}, c1: {:.2f}% c12: {:.2f}% c24: {:.2f}% score: {:.1f}'.format(epoch+1, index + 1, len(self.train_data),epoch_loss, epoch_acc, c4/126.11, c12/126.11, c24/126.11, c4*2+c12+c24*0.5), end='')
+            print('\rEpoche: {} [Learn] ({}/{}) loss: {:.4f}, acc: {:.4f}, c1: {:.2f}% c12: {:.2f}% c24: {:.2f}% score: {:.1f}'.format(epoch+1, index + 1, len(self.train_data),epoch_loss, epoch_acc, c4/126.11, c12/126.11, c24/126.11, c4*2+c12+c24*0.5), end='')
             sys.stdout.flush()
         end = time.time()
 

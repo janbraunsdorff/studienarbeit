@@ -85,14 +85,17 @@ class Trainer():
             y = y.to(conf.device)
 
             out = self.model(x)
-            loss = nn.CrossEntropyLoss()(out, y)
+            loss = nn.MSELoss()(out, y.float()) 
 
             out = out.cpu()
             x = x.cpu()
             y = y.cpu()
 
             acc = self.accuracy(out, y)
-            eps.append({'val_loss': loss.item(), 'val_acc': acc.item()})
+            c4 = self.correct(out, y, 4)
+            c12 = self.correct(out, y, 12)
+            c24 = self.correct(out, y, 24)
+            eps.append({'val_loss': loss.item(), 'val_acc': acc.item(), 'c4' : c4, 'c12' : c12,'c24' : c24})
 
             batch_losses = [x['val_loss'] for x in eps]
             epoch_loss = np.average(batch_losses)
@@ -123,7 +126,7 @@ class Trainer():
 
         return epoch_loss, epoch_acc
 
-    def correct(out, lbl, trashold):
+    def correct(self, out, lbl, trashold):
         out = torch.round(out)
         lbl = torch.round(lbl)
         ab = torch.abs(lbl - out).detach().cpu()

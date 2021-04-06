@@ -71,13 +71,10 @@ class ViT(nn.Module):
 
 
         sex = self.dense32(sex.unsqueeze(1).float())
-
-        print(y.shape, sex.shape)
-
         x = torch.cat((y, sex), 1)
 
 
-        x = self.relu(x)
+        x = self.activate(x)
         x = self.dense1000_1(x)
         x = self.activate(x)
         x = self.drop_1(x)

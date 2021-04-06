@@ -1,4 +1,5 @@
 import torch.nn as nn
+import torch
 import vit.model.config as conf
 from vit.model.multilayerPerceptron import MultilayerPerceptron
 
@@ -15,6 +16,7 @@ class Transformer(nn.Module):
 
 
     def forward(self, encoded_patches):
+        torch.set_printoptions(edgeitems=32)
         print(encoded_patches)
         print(encoded_patches.shape, self.norm_1)
         raise Exception('nö')

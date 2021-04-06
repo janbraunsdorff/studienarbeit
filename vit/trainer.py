@@ -3,6 +3,7 @@ import torch
 import torch.nn as nn
 import numpy as np
 import time
+import sys
 
 class Trainer():
     def __init__(self, model, train_data, val_data):
@@ -70,7 +71,7 @@ class Trainer():
 
 
             print('\rEpoche: {} [Training] ({}/{}) loss: {:.4f}, acc: {:.4f}, c1: {:.2f}% c12: {:.2f}% c24: {:.2f}% score: {:.1f}'.format(epoch+1, index + 1, len(self.train_data),epoch_loss, epoch_acc, c4/126.11, c12/126.11, c24/126.11, c4*2+c12+c24*0.5), end='')
-        
+            sys.stdout.flush()
         end = time.time()
 
         batch_losses = [x['val_loss'] for x in eps]
@@ -87,6 +88,7 @@ class Trainer():
         self.sheduler.step(c4*2+c12+c24*0.5)
 
         print("\rEpoche: {} [Done] {} loss: {:.4f}, acc: {:.4f}, c1: {:.2f}% c12: {:.2f}% c24: {:.2f}% score: {:.1f}".format(epoch+1, time.strftime('%M:%S', time.gmtime(end - start)), epoch_loss, epoch_acc, c4/126.11, c12/126.11, c24/126.11, c4*2+c12+c24*0.5), end=' | ')
+        sys.stdout.flush()
 
         return epoch_loss, epoch_acc
 
@@ -129,6 +131,8 @@ class Trainer():
         c24 = [x['c24'] for x in eps]
         c24 = np.sum(c24)
         print("[Test] loss: {:.4f}, acc: {:.4f}, c1: {:.2}% c12: {:.2f}% c24: {:.2f}% score: {}".format(epoch_loss, epoch_acc, c4/14.25, c12/14.25, c24/14.25, c4*2+c12+c24*0.5))
+        sys.stdout.flush()
+
 
         return epoch_loss, epoch_acc
 

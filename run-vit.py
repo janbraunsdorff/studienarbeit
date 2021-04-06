@@ -6,6 +6,7 @@ from vit.model.vit import ViT
 from vit.trainer import Trainer
 from vit.mussure import benchmark
 import sys
+import os
 from vit.preprocessing.processing import process_store_image_train, process_store_image_val, load_data
 
 

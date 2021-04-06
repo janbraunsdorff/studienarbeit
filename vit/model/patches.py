@@ -22,17 +22,16 @@ class PatchEncoder (nn.Module):
   def __init__(self, num_patches, project_dim):
     super(PatchEncoder, self).__init__()
     self.num_patches = num_patches
-    self.projection = nn.Linear(in_features=108, out_features=project_dim)
+    self.projection = nn.Linear(in_features=256, out_features=project_dim)
     self.prostional_embedding = nn.Embedding(num_embeddings=144, embedding_dim=project_dim)
     self.to(conf.device)
 
 
 
   def forward(self, patch):
-    # patch = B x 144 x 108
+    # patch = B x 256 x 256
     positions =  torch.arange(start=0, end=self.num_patches, step=1).to(conf.device)
     # positions = 144
-    print(patch.shape)
     p1 = self.projection(patch)
     # p1 = B x 144 x 64
     p2 = self.prostional_embedding(positions)

@@ -42,8 +42,6 @@ class ViT(nn.Module):
         # x =  B x 3 x 72 x 72
         x = x / 255.0
         sex = sex.float()
-
-        print(x.dtype, sex.dtype)
         # x =  B x 3 x 72 x 72
         aug = augmentation.data_augmentation(x)
         # aug = B x 3 x 72 x 72
@@ -72,9 +70,10 @@ class ViT(nn.Module):
         y = self.mlp_drop_2(y)
 
 
-        sex = self.dense32(sex)
+        sex = self.dense32(sex.unsqueeze(1).float())
 
         print(y.shape, sex.shape)
+
         x = torch.cat((y, sex), 1)
 
 

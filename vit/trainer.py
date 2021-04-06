@@ -27,7 +27,6 @@ class Trainer():
         sum = 0
         for index, batch in enumerate(self.train_data):
             x , y , z = batch
-            sum += x.shape[0]
             x = x.to(conf.device)
             y = y.to(conf.device)
             z = z.to(conf.device)
@@ -57,7 +56,7 @@ class Trainer():
             batch_losses = [x['val_loss'] for x in eps]
             epoch_loss = np.average(batch_losses)
             batch_accs = [x['val_acc'] for x in eps]
-            epoch_acc = (np.sum(batch_accs) / sum) * 100.0
+            epoch_acc = np.average(batch_accs)
 
             c4 = [x['c4'] for x in eps]
             c4 = np.sum(c4)

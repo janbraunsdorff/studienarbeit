@@ -1,6 +1,6 @@
 import torch
 
-lr = 1e-3
+lr = 1e-5
 weight_decay = 1e-5
 batch_szie = 32
 num_epoch = 1000

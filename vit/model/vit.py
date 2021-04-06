@@ -3,6 +3,7 @@ import vit.model.data_augmentation as augmentation
 from vit.model.patches import PatchEncoder, Patches
 from vit.model.transformer import Transformer
 import vit.model.config as conf
+import torch
 
 class ViT(nn.Module):
     def __init__(self):
@@ -19,10 +20,18 @@ class ViT(nn.Module):
         self.mlp_drop_2 = nn.Dropout(p=0.1)
 
         self.activate = nn.GELU()
+        self.dense32 = nn.Linear(1, 64)
+
+        self.dense1000_1 = nn.Linear(1024+64, 1000)
+        self.dense1000_2 = nn.Linear(1000, 1000)
+        self.dense1000_4 = nn.Linear(1000, 1)
+
+        self.drop_1 = nn.Dropout()
+        self.drop_2 = nn.Dropout()
+        self.drop_3 = nn.Dropout()
 
         self.to(conf.device)
-
-        self.lognits = nn.Linear(in_features=1024, out_features=conf.num_classes)
+        
 
         self.transformers = []
         for i in range(conf.transformer_layers):
@@ -57,5 +66,20 @@ class ViT(nn.Module):
         y = self.activate(y)
         y = self.mlp_drop_2(y)
 
-        log = self.lognits(y)
-        return log
+
+        x = torch.cat((x, y), 1)
+
+
+        x = self.relu(x)
+        x = self.dense1000_1(x)
+        x = self.activate(x)
+        x = self.drop_1(x)
+
+        x = self.dense1000_2(x)
+        x = self.activate(x)
+        x = self.drop_2(x)
+
+        x = self.dense1000_4(x)
+        x = self.activate(x)
+        
+        return x

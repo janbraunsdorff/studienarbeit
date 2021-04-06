@@ -20,13 +20,16 @@ class Trainer():
     def train(self):
         self.model.train()
         eps = []
+        sum = 0
         for batch in self.train_data:
             x , y = batch
+            sum += x.shape[0]
             x = x.to(conf.device)
             y = y.to(conf.device)
 
             out = self.model(x)
-            loss = nn.CrossEntropyLoss()(out, y)
+            out = out.reshape(list(out.size())[0])
+            loss = nn.MSELoss()(out, y.float()) 
 
             loss.backward()
             self.optim.step()
@@ -37,13 +40,38 @@ class Trainer():
             out = out.cpu()
 
             acc = self.accuracy(out, y)
-            eps.append({'val_loss': loss.item(), 'val_acc': acc.item()})
+            c4 = self.correct(out, y, 4)
+            c12 = self.correct(out, y, 12)
+            c24 = self.correct(out, y, 24)
+            eps.append({'val_loss': loss.item(), 'val_acc': acc.item(), 'c4' : c4, 'c12' : c12,'c24' : c24})
+
+
+            batch_losses = [x['val_loss'] for x in eps]
+            epoch_loss = np.average(batch_losses)
+            batch_accs = [x['val_acc'] for x in eps]
+            epoch_acc = (np.sum(batch_accs) / sum) * 100.0
+
+            c4 = [x['c4'] for x in eps]
+            c4 = np.sum(c4)
+            c12 = [x['c12'] for x in eps]
+            c12 = np.sum(c12)
+            c24 = [x['c24'] for x in eps]
+            c24 = np.sum(c24)
+
+            print('\r[Training] loss: {:.4f}, acc: {:.4f}%, c1: {} c12: {} c24: {}'.format(epoch_loss, epoch_acc, c4, c12, c24), end='')
 
         batch_losses = [x['val_loss'] for x in eps]
         epoch_loss = np.average(batch_losses)
         batch_accs = [x['val_acc'] for x in eps]
-        epoch_acc = (np.sum(batch_accs) / 50000.0) * 100.0
-        print("train-loss: {:.4f}, train-acc: {:.4f}%".format(epoch_loss, epoch_acc), end=' | ')
+        epoch_acc = (np.sum(batch_accs) / 12611) * 100.0
+
+        c4 = [x['c4'] for x in eps]
+        c4 = np.sum(c4)
+        c12 = [x['c12'] for x in eps]
+        c12 = np.sum(c12)
+        c24 = [x['c24'] for x in eps]
+        c24 = np.sum(c24)
+        print("[Train] loss: {:.4f}, acc: {:.4f}, c1: {} c12: {} c24: {}".format(epoch_loss, epoch_acc, c4, c12, c24), end=' | ')
 
         return epoch_loss, epoch_acc
 
@@ -66,14 +94,40 @@ class Trainer():
             acc = self.accuracy(out, y)
             eps.append({'val_loss': loss.item(), 'val_acc': acc.item()})
 
+            batch_losses = [x['val_loss'] for x in eps]
+            epoch_loss = np.average(batch_losses)
+            batch_accs = [x['val_acc'] for x in eps]
+            epoch_acc = (np.sum(batch_accs) / sum) * 100.0
+
+            c4 = [x['c4'] for x in eps]
+            c4 = np.sum(c4)
+            c12 = [x['c12'] for x in eps]
+            c12 = np.sum(c12)
+            c24 = [x['c24'] for x in eps]
+            c24 = np.sum(c24)
+
+            print('\r[Test] loss: {:.4f}, acc: {:.4f}%, c1: {} c12: {} c24: {}'.format(epoch_loss, epoch_acc, c4, c12, c24), end='')
+
         batch_losses = [x['val_loss'] for x in eps]
         epoch_loss = np.average(batch_losses)
         batch_accs = [x['val_acc'] for x in eps]
-        epoch_acc = (np.sum(batch_accs) / 10000.0) * 100.0
-        print("test-loss: {:.4f}, test-acc: {:.4f}%".format(epoch_loss, epoch_acc))
+        epoch_acc = (np.sum(batch_accs) / 12611) * 100.0
+
+        c4 = [x['c4'] for x in eps]
+        c4 = np.sum(c4)
+        c12 = [x['c12'] for x in eps]
+        c12 = np.sum(c12)
+        c24 = [x['c24'] for x in eps]
+        c24 = np.sum(c24)
+        print("[Test] loss: {:.4f}, acc: {:.4f}, c1: {} c12: {} c24: {}".format(epoch_loss, epoch_acc, c4, c12, c24))
 
         return epoch_loss, epoch_acc
 
+    def correct(out, lbl, trashold):
+        out = torch.round(out)
+        lbl = torch.round(lbl)
+        ab = torch.abs(lbl - out).detach().cpu()
+        return len(np.where(ab.numpy() <= trashold)[0])
 
     def accuracy(self, out, labels):
-        return len(out) - torch.count_nonzero(torch.argmax(out, dim=1)- torch.abs(labels))
+        return torch.sum(torch.abs(torch.sub(out, labels))) / len(labels)

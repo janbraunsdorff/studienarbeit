@@ -43,6 +43,8 @@ class MnistModel(nn.Module):
 
     def agument(self, x):
         if self.training:
+            print('aug')
+            sys.stdout.flush()
             x = self.aug(x)
         return x
 
@@ -50,6 +52,8 @@ class MnistModel(nn.Module):
     def forward(self, x, y):
         x = x.float()
         x = x / 255.0
+        x = self.agument(x)
+
         y = y.float()
         x = self.inception_v3(x)
         if self.training:

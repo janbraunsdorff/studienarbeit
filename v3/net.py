@@ -41,7 +41,7 @@ class MnistModel(nn.Module):
                 transforms.RandomApply([
                     transforms.GaussianBlur(kernel_size=3, sigma=7)
                 ], p=0.3),
-                transforms.RandomErasing(p=0.4, scale=(0.02, 0.2))
+                transforms.RandomErasing(p=0.4, scale=(0.02, 0.2), ratio=(0.1, 0.7))
             ]
         )
 

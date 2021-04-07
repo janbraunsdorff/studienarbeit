@@ -13,7 +13,7 @@ random.seed(0)
 # git pull && clear && python3 runner.py | tee log.txt
 
 
-# pre_process()
+pre_process()
 
 
 print('Start Trainig')

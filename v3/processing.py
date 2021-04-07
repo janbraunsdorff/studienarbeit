@@ -77,11 +77,8 @@ def load_data(path, batch_size):
     return train_loader, val_loader
 
 
-def processImages(img_path, size_target=256):
+def processImages(img_path, resize_to=500, reduce_to=380, out_to=299):
     img = cv2.imread(img_path)
-
-    size_target = 450
-    img = cv2.resize(img, (size_target, size_target), interpolation=cv2.INTER_LINEAR)
 
     lab = cv2.cvtColor(img, cv2.COLOR_BGR2LAB)
     lab_planes = cv2.split(lab)
@@ -90,12 +87,21 @@ def processImages(img_path, size_target=256):
     lab = cv2.merge(lab_planes)
     bgr = cv2.cvtColor(lab, cv2.COLOR_LAB2BGR)
 
-    x = y = (size_target - 299) // 2
+    x = y = (resize_to - reduce_to) // 2
+    h = w = reduce_to
+    img = img[y:y + h, x:x + w]
 
-    h = w = 299
-    img = bgr[y:y + h, x:x + w]
+    lab = cv2.cvtColor(img, cv2.COLOR_BGR2LAB)
+    lab_planes = cv2.split(lab)
+    clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8))
+    lab_planes[0] = clahe.apply(lab_planes[0])
+    lab = cv2.merge(lab_planes)
+    img = cv2.cvtColor(lab, cv2.COLOR_LAB2BGR)
 
-    
+    kernel = np.ones((2,2),np.uint8)
+    img = cv2.morphologyEx(img, cv2.MORPH_OPEN, kernel)
+
+    img = cv2.resize(img, (out_to, out_to), interpolation=cv2.INTER_LINEAR)
     return img
 
 

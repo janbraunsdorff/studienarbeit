@@ -79,7 +79,7 @@ class Trainer():
             c24 = np.sum(c24)
 
 
-            print('\rEpoche: {} [Learn] ({}/{}) loss: {:.4f}, acc: {:.4f}, c1: {:.2f}% c12: {:.2f}% c24: {:.2f}% score: {:.4f}'.format(epoch+1, index + 1, len(self.train_data),epoch_loss, epoch_acc, c4/126.11, c12/126.11, c24/126.11,(c4*2+c12+c24*0.5)/12611.0), end='')
+            print('\rEpoche: {:3} [Learn] ({:3}/{:3}) loss: {:8.4f}, acc: {:8.4f}, c1: {:6.2f}% c12: {:6.2f}% c24: {:6.2f}% score: {:.4f}'.format(epoch+1, index + 1, len(self.train_data),epoch_loss, epoch_acc, c4/126.11, c12/126.11, c24/126.11,(c4*2+c12+c24*0.5)/12611.0), end='')
             sys.stdout.flush()
         end = time.time()
 
@@ -96,7 +96,7 @@ class Trainer():
         c24 = np.sum(c24)
         self.sheduler.step(c4*2+c12+c24*0.5)
 
-        print("\rEpoche: {} [Done] {} loss: {:.4f}, acc: {:.4f}, c1: {:.2f}% c12: {:.2f}% c24: {:.2f}% score: {:.4f}".format(epoch+1, time.strftime('%M:%S', time.gmtime(end - start)), epoch_loss, epoch_acc, c4/126.11, c12/126.11, c24/126.11, (c4*2+c12+c24*0.5)/12611.0), end=' | ')
+        print("\rEpoche: {} [Done] {} loss: {:9.4f}, acc: {:9.4f}, c1: {:9.2f}% c12: {:6.2f}% c24: {:6.2f}% score: {:.4f}".format(epoch+1, time.strftime('%M:%S', time.gmtime(end - start)), epoch_loss, epoch_acc, c4/126.11, c12/126.11, c24/126.11, (c4*2+c12+c24*0.5)/12611.0), end=' | ')
         sys.stdout.flush()
 
         return epoch_loss, epoch_acc
@@ -139,7 +139,7 @@ class Trainer():
         c12 = np.sum(c12)
         c24 = [x['c24'] for x in eps]
         c24 = np.sum(c24)
-        print("[Test] loss: {:.4f}, acc: {:.4f}, c1: {:.2}% c12: {:.2f}% c24: {:.2f}% score: {:.4f}".format(epoch_loss, epoch_acc, c4/14.25, c12/14.25, c24/14.25, (c4*2+c12+c24*0.5) / 1425.0), end='')
+        print("[Test] loss: {:9.4f}, acc: {:9.4f}, c1: {:6.2}% c12: {:6.2f}% c24: {:6.2f}% score: {:.4f}".format(epoch_loss, epoch_acc, c4/14.25, c12/14.25, c24/14.25, (c4*2+c12+c24*0.5) / 1425.0), end='')
         sys.stdout.flush()
 
 

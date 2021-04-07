@@ -131,7 +131,7 @@ class MnistModel(nn.Module):
         return {'val_loss': epoch_loss.item(), 'val_acc': epoch_acc.item(), 'c4' : c4, 'c12' : c12,'c24' : c24}
 
     def epoch_end(self, epoch, result):
-        print("epoch [{:3}]".format(epoch), end=' ,')
+        print("epoch [{:3}]".format(epoch), end=', ')
         print("val_loss: \u001B[31m{:8.4f}\x1b[0m".format(result['val_loss']), end=', ')
         print("val_acc: \u001B[31m{:8.4f}\x1b[0m".format(result['val_acc']), end=', ')
         print("c4 : \u001B[31m{:4}/{} ({:8.4f}%)\x1b[0m".format(result['c4'],  1425, (result['c4'] /1425)  * 100), end=", ")

@@ -37,9 +37,7 @@ class MnistModel(nn.Module):
 
         self.aug =  aug = transforms.Compose(
             [
-                transforms.RandomRotation(degrees=20),
-                transforms.ColorJitter(brightness=(0, 1), contrast=0, saturation=0, hue=0)
-                #transforms.RandomResizedCrop(size=(299, 299))
+                transforms.RandomRotation(degrees=10),
             ]
         )
 
@@ -134,11 +132,11 @@ class MnistModel(nn.Module):
 
     def epoch_end(self, epoch, result):
         print("epoch [{}]".format(epoch), end=' ,')
-        print("val_loss: \u001B[31m{:.4f}\x1b[0m".format(result['val_loss']), end=', ')
-        print("val_acc: \u001B[31m{:.4f}\x1b[0m".format(result['val_acc']), end=', ')
-        print("c4 : \u001B[31m{}/{} ({:.4f}%)\x1b[0m".format(result['c4'],  1425, (result['c4'] /1425)  * 100), end=", ")
-        print("c12: \u001B[31m{}/{} ({:.4f}%)\x1b[0m".format(result['c12'], 1425, (result['c12'] /1425) * 100), end=", ")
-        print("c24: \u001B[31m{}/{} ({:.4f}%)\x1b[0m".format(result['c24'], 1425, (result['c24'] /1425) * 100), end=", ")
+        print("val_loss: \u001B[31m{:4.4f}\x1b[0m".format(result['val_loss']), end=', ')
+        print("val_acc: \u001B[31m{:4.4f}\x1b[0m".format(result['val_acc']), end=', ')
+        print("c4 : \u001B[31m{}/{} ({:3.4f}%)\x1b[0m".format(result['c4'],  1425, (result['c4'] /1425)  * 100), end=", ")
+        print("c12: \u001B[31m{}/{} ({:3.4f}%)\x1b[0m".format(result['c12'], 1425, (result['c12'] /1425) * 100), end=", ")
+        print("c24: \u001B[31m{}/{} ({:3.4f}%)\x1b[0m".format(result['c24'], 1425, (result['c24'] /1425) * 100), end=", ")
 
 
 def fit(epochs, lr, betas,  model, train_loader, val_loader, stop_after, opt_func=torch.optim.Adam):
@@ -166,7 +164,7 @@ def fit(epochs, lr, betas,  model, train_loader, val_loader, stop_after, opt_fun
         else:
             eps_without_no_new_optim = eps_without_no_new_optim + 1
 
-        print("max_c12: \u001B[35m{}\x1b[0m, eps_without_no_new_optim: \u001B[35m{}\x1b[0m".format(min_loss, eps_without_no_new_optim))
+        print("max_c12: \u001B[35m{:4}\x1b[0m, eps_without_no_new_optim: \u001B[35m{:2}\x1b[0m".format(min_loss, eps_without_no_new_optim))
         sys.stdout.flush()
 
         if (eps_without_no_new_optim > stop_after):

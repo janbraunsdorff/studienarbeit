@@ -37,7 +37,6 @@ class MnistModel(nn.Module):
 
         self.aug =  aug = transforms.Compose(
             [
-                # transforms.RandomHorizontalFlip(),
                 transforms.RandomRotation(degrees=20),
                 transforms.RandomResizedCrop(size=(299, 299))
             ]

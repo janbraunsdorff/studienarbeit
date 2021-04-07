@@ -37,8 +37,11 @@ class MnistModel(nn.Module):
 
         self.aug =  aug = transforms.Compose(
             [
-                transforms.RandomRotation(degrees=10),
-                transforms.RandomErasing()
+                transforms.RandomRotation(degrees=20),
+                transforms.RandomApply([
+                    transforms.GaussianBlur(kernel_size=5),
+                ], p=0.4),
+                transforms.RandomErasing(p=0.5)
             ]
         )
 

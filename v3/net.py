@@ -43,8 +43,6 @@ class MnistModel(nn.Module):
 
     def agument(self, x):
         if self.training:
-            print('aug')
-            sys.stdout.flush()
             x = self.aug(x)
         return x
 

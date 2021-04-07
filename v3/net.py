@@ -38,7 +38,8 @@ class MnistModel(nn.Module):
         self.aug =  aug = transforms.Compose(
             [
                 transforms.RandomRotation(degrees=20),
-                transforms.RandomResizedCrop(size=(299, 299))
+                transforms.ColorJitter(brightness=(0, 1), contrast=0, saturation=0, hue=0)
+                #transforms.RandomResizedCrop(size=(299, 299))
             ]
         )
 
@@ -160,7 +161,7 @@ def fit(epochs, lr, betas,  model, train_loader, val_loader, stop_after, opt_fun
 
         if (np.max([i['c12'] for i in history]) > min_loss):
             min_loss = result['c12']
-            torch.save(model, 'model/v3_pre.pth')
+            torch.save(model, 'model/v3_trash.pth')
             eps_without_no_new_optim = 0
         else:
             eps_without_no_new_optim = eps_without_no_new_optim + 1

@@ -20,7 +20,7 @@ print('Start Trainig')
 sys.stdout.flush()
 
 config= [
-    [48, (0.9, 0.999), 1e-4, 100_000, 15],
+    [48, (0.9, 0.999), 1e-4, 100_000, 100_000],
 ]
 
 for c in config:

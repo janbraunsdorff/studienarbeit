@@ -7,6 +7,7 @@ data_augmentation = transforms.Compose(
             transforms.RandomApply([
                 transforms.RandomAffine(degrees=30)
             ], p=0.7),
-            transforms.RandomErasing(p=0.4, scale=(0.02, 0.2), ratio=(0.1, 0.7))
+            transforms.RandomErasing(p=0.4, scale=(0.02, 0.2), ratio=(0.1, 0.7)),
+            transforms.RandomHorizontalFlip(p=0.5)
     ]
 )

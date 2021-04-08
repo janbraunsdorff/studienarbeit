@@ -15,7 +15,7 @@ hidden_layers = [
     (project_dim*2, project_dim*2), 
     (project_dim*2, project_dim)
 ]
-transformer_layers = 16
+transformer_layers = 8
 # mlp_head_units = [4096, 2048, 2048, 1024]
 res_file = 'result-first.csv'
 

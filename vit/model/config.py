@@ -17,6 +17,7 @@ hidden_layers = [
 ]
 transformer_layers = 16
 # mlp_head_units = [4096, 2048, 2048, 1024]
+res_file = 'result-first.csv'
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print('Device: ', device)

@@ -94,9 +94,11 @@ class Trainer():
         c12 = np.sum(c12) / 126.11
         c24 = [x['c24'] for x in eps]
         c24 = np.sum(c24) / 126.11
-        self.sheduler.step(c4*2+c12+c24*0.5)
-
+        
         print("\rEpoche: {:3} [Done] {} loss: {:9.4f}, acc: {:9.4f}, c4: {:6.2f}% c12: {:6.2f}% c24: {:6.2f}% score: {:.4f}".format(epoch+1, time.strftime('%M:%S', time.gmtime(end - start)), epoch_loss, epoch_acc, c4, c12, c24, (c4*2+c12+c24*0.5)), end=' | ')
+        f = open(conf.res_file, "a")
+        f.write(";".join(str(epoch+1), str(time.strftime('%M:%S', time.gmtime(end - start))), str(epoch_loss), str(epoch_acc), str(c4), str(c12), str(c24), str(c4*2+c12+c24*0.5)))
+        f.close()
         sys.stdout.flush()
 
         return epoch_loss, epoch_acc
@@ -140,7 +142,13 @@ class Trainer():
         c24 = [x['c24'] for x in eps]
         c24 = np.sum(c24) / 14.25
 
+        self.sheduler.step(c4*2+c12+c24*0.5)
+
+
         print("[Test] loss: {:9.4f}, acc: {:9.4f}, c4: {:6.2}% c12: {:6.2f}% c24: {:6.2f}% score: {:8.4f}".format(epoch_loss, epoch_acc, c4, c12, c24, (c4*2+c12+c24*0.5)), end='')
+        f = open(conf.res_file, "a")
+        f.write(";".join(str(epoch+1), str(time.strftime('%M:%S', time.gmtime(end - start))), str(epoch_loss), str(epoch_acc), str(c4), str(c12), str(c24), str(c4*2+c12+c24*0.5)) + '\n')
+        f.close()
         sys.stdout.flush()
 
 

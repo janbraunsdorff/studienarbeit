@@ -8,7 +8,7 @@ image_size = 256
 patch_size = 16
 num_patches = (image_size // patch_size) ** 2
 project_dim = 128
-num_heads = 8
+num_heads = 12
 hidden_layers = [
     (project_dim, project_dim*2), 
     #(project_dim*2, project_dim*2), 

@@ -10,7 +10,7 @@ torch.manual_seed(0)
 random.seed(0)
 
 # clear && nvidia-smi && free
-# git pull && clear && python3 attention-runner.py | tee log.txt
+# git pull && clear && python3 run-attention.py | tee log.txt
 
 
 pre_process()

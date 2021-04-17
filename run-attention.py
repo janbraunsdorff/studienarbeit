@@ -13,14 +13,14 @@ random.seed(0)
 # git pull && clear && python3 attention-runner.py | tee log.txt
 
 
-#pre_process()
+pre_process()
 
 
 print('Start Trainig')
 sys.stdout.flush()
 
 config= [
-    [24, 1e-6],
+    [32, 1e-6],
 ]
 
 for c in config:

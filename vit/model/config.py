@@ -2,17 +2,15 @@ import torch
 
 lr = 1e-4
 weight_decay = 1e-5
-batch_szie = 32
+batch_szie = 64
 num_epoch = 10_000
 image_size = 256
 patch_size = 16
 num_patches = (image_size // patch_size) ** 2
-project_dim = 128
+project_dim = 256
 num_heads = 32 
 hidden_layers = [
     (project_dim, project_dim*2), 
-    #(project_dim*2, project_dim*2), 
-    #(project_dim*2, project_dim*2), 
     (project_dim*2, project_dim)
 ]
 transformer_layers = 4

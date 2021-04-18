@@ -7,7 +7,7 @@ num_epoch = 10_000
 image_size = 256
 patch_size = 16
 num_patches = (image_size // patch_size) ** 2
-project_dim = 288
+project_dim = 128
 num_heads = 32 
 hidden_layers = [
     (project_dim, project_dim*2), 
@@ -15,7 +15,7 @@ hidden_layers = [
     #(project_dim*2, project_dim*2), 
     (project_dim*2, project_dim)
 ]
-transformer_layers = 3
+transformer_layers = 4
 res_file = 'result-trans-8-small-hidden.csv'
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")

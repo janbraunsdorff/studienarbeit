@@ -7,8 +7,8 @@ num_epoch = 10_000
 image_size = 256
 patch_size = 16
 num_patches = (image_size // patch_size) ** 2
-project_dim = 144
-num_heads = 12
+project_dim = 224
+num_heads = 32 
 hidden_layers = [
     (project_dim, project_dim*2), 
     #(project_dim*2, project_dim*2), 

@@ -13,7 +13,7 @@ hidden_layers = [
     (project_dim, project_dim*2), 
     (project_dim*2, project_dim)
 ]
-transformer_layers = 5
+transformer_layers = 4
 res_file = 'result-trans-8-small-hidden.csv'
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")

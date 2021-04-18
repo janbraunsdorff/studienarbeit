@@ -22,8 +22,8 @@ class PatchEncoder (nn.Module):
   def __init__(self, num_patches, project_dim):
     super(PatchEncoder, self).__init__()
     self.num_patches = num_patches
-    self.projection = nn.Linear(in_features=256, out_features=project_dim)
-    self.prostional_embedding = nn.Embedding(num_embeddings=256, embedding_dim=project_dim)
+    self.projection = nn.Linear(in_features=64, out_features=project_dim)
+    self.prostional_embedding = nn.Embedding(num_embeddings=64, embedding_dim=project_dim)
     self.to(conf.device)
 
 

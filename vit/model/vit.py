@@ -4,6 +4,7 @@ from vit.model.patches import PatchEncoder, Patches
 from vit.model.transformer import Transformer
 import vit.model.config as conf
 import torch
+import numpy as np
 
 class ViT(nn.Module):
     def __init__(self):
@@ -54,8 +55,8 @@ class ViT(nn.Module):
             encoding, att = t(encoding)
         # encode_patches = B x 144 x 64 
 
-        print(encoding.shape, att[0].shape)
-        print(att[0])
+        print(att[0].squeeze(1).squeeze(1).shape)
+        print(np.argmax(att[0]))
         raise Exception('nö')
 
         representation = self.norm_1(encoding)

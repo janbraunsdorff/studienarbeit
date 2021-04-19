@@ -51,8 +51,11 @@ class ViT(nn.Module):
         # encoding = B x 144 x 64
 
         for t in self.transformers:
-            encoding = t(encoding)
+            encoding, att = t(encoding)
         # encode_patches = B x 144 x 64 
+
+        print(encoding.shape, att.shape)
+        raise Exception('nö')
 
         representation = self.norm_1(encoding)
         # representation_1:  torch.Size([256, 144, 64])

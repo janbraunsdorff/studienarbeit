@@ -35,7 +35,7 @@ class Trainer():
             print(' | save model...', end=' ')
             torch.save(self.model, 'model/vit-bad.pth')
             best_score = score
-            print('**done**', end='')
+            print('**done**')
             sys.stdout.flush()
 
 

@@ -58,16 +58,10 @@ class ViT(nn.Module):
         # encode_patches = B x 144 x 64 
 
         t = torch.mean(encoding, 2)
-        print(t.shape)
 
         max_value = torch.max(t, dim=1)[0]
-        print(max_value.shape)
-        t = t / max_value
-        t = t.squeeze(0)
-        t = t.detach().numpy()
-        t2 = t.copy()
-
-    
+        t = t / max_value.view(16,1)
+        print(t.shape)
 
         representation = self.norm_1(encoding)
         # representation_1:  torch.Size([256, 144, 64])

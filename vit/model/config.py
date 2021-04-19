@@ -13,8 +13,11 @@ hidden_layers = [
     (project_dim, project_dim*2), 
     (project_dim*2, project_dim)
 ]
-transformer_layers = 4
+transformer_layers = 8
 res_file = 'result-trans-8-small-hidden.csv'
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print('Device: ', device)
+
+# clear && git add . && git commit -m "test" && git push && nvidia-smi && tail -n 5 result-trans-8-small-hidden.csv
+# clear && git pull && nohup python3 run-vit.py

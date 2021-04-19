@@ -60,7 +60,7 @@ class ViT(nn.Module):
 
         att = self.patch_focus(att)
         prio = torch.argmax(att.view(-1, 256), 1)
-        print(prio)
+        print(prio.shape)
         raise Exception('nö')
 
         representation = self.norm_1(encoding)

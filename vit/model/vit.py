@@ -61,7 +61,7 @@ class ViT(nn.Module):
 
         max_value = torch.max(t, dim=1)[0]
         t = t / max_value.view(16,1)
-        print(t.shape)
+        # 16, 256
 
         representation = self.norm_1(encoding)
         # representation_1:  torch.Size([256, 144, 64])

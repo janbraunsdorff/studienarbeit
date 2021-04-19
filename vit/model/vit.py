@@ -59,7 +59,7 @@ class ViT(nn.Module):
         # encode_patches = B x 144 x 64 
 
         att = self.patch_focus(att)
-        prio = torch.argmax(att.view(2, 16), 1)
+        prio = torch.argmax(att.view(-1, 256), 1)
         print(prio)
         raise Exception('nö')
 

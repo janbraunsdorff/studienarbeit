@@ -57,8 +57,8 @@ class ViT(nn.Module):
 
         print('0: ', att.shape)
         print('1: ', att[0].shape)
-        print('2: ', att.squeeze(1).shape)
-        print('3: ', att.squeeze(1).reshape(256, 16, 16).shape)
+        print('2: ', att[0])
+        print('3: ', att[0].squeeze(1).reshape(256, 16, 16).shape)
         print(torch.argmax(att[0]))
         raise Exception('nö')
 

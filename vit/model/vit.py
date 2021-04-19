@@ -60,7 +60,7 @@ class ViT(nn.Module):
         t = torch.mean(encoding, 2)
         print(t.shape)
 
-        max_value = torch.max(t, dim=1)[0]
+        max_value = torch.max(t, dim=1)[0].squeeze(1)
         print(max_value.shape)
         t = t / max_value
         t = t.squeeze(0)

@@ -38,7 +38,6 @@ class ViT(nn.Module):
         for i in range(conf.transformer_layers):
             self.transformers.append(Transformer(conf.patch_size))
 
-        self.patch_focus = torch.nn.MaxPool2d(kernel_size=(16,16), stride=16, padding=0)
 
 
 
@@ -55,13 +54,18 @@ class ViT(nn.Module):
         # encoding = B x 144 x 64
 
         for t in self.transformers:
-            encoding, att = t(encoding)
+            encoding = t(encoding)
         # encode_patches = B x 144 x 64 
 
-        att = self.patch_focus(att)
-        prio = torch.argmax(att.view(-1, 256), 1)
-        y = torch.div(prio, 16, rounding_mode='trunc')
-        x = torch.sub(prio, y*16)
+        t = torch.mean(encoding, 2)
+        print(t.shape)
+
+        max_value = torch.max(t, dim=1)[0]
+        t = t / max_value
+        t = t.squeeze(0)
+        t = t.detach().numpy()
+        t2 = t.copy()
+
     
 
         representation = self.norm_1(encoding)

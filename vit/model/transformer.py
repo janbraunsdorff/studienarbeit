@@ -17,17 +17,10 @@ class Transformer(nn.Module):
 
     def forward(self, encoded_patches):
         x1 = self.norm_1(encoded_patches)
-        res = torch.matmul(x1, torch.transpose(x1, 1,2))
         attention_output = self.mha(x1,x1,x1)
         x2 = attention_output[0] + encoded_patches
         x3 = self.norm_2(x2)
         x3 = self.mlp(x3)
         ret = x3 + x2
 
-        print(attention_output[1].shape)
-        print(attention_output[1].view(-1, 4))
-
-
-        raise Exception('NO')
-
-        return ret, res
+        return ret

@@ -10,14 +10,15 @@ class Patches(nn.Module):
 
 
   def forward(self, images):
-    print(images.shape)
+    print('1' + images.shape)
     batch = images.size()[0]
     patches = images.unfold(1, 1, 1).unfold(2, conf.patch_size, conf.patch_size).unfold(3, conf.patch_size, conf.patch_size)
-    print(patches.shape)
+    print('2' +patches.shape)
     patches = patches.squeeze(1)
-    print(patches.shape)
+    print('3' + patches.shape)
     patches = patches.resize(batch, conf.num_patches, conf.patch_size* conf.patch_size)
-    print(patches.shape)
+    print('4' + patches.shape)
+    raise Exception('nö')
     return patches
 
 

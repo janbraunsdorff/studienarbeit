@@ -2,7 +2,7 @@ import torch
 
 lr = 1e-4
 weight_decay = 1e-5
-batch_szie = 16
+batch_szie = 32
 num_epoch = 10_000
 image_size = 256
 patch_size = 16
@@ -21,3 +21,4 @@ print('Device: ', device)
 
 # clear && git add . && git commit -m "test" && git push && nvidia-smi && tail -n 5 result-trans-8-small-hidden.csv
 # clear && git pull && nohup python3 run-vit.py
+# clear && git pull && python3 run-vit.py

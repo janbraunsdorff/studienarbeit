@@ -61,6 +61,7 @@ class ViT(nn.Module):
         print(t.shape)
 
         max_value = torch.max(t, dim=1)[0]
+        print(max_value)
         t = t / max_value
         t = t.squeeze(0)
         t = t.detach().numpy()

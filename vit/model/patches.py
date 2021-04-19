@@ -17,7 +17,7 @@ class Patches(nn.Module):
     patches = patches.squeeze(1)
     print('3', patches.shape)
     patches = patches.resize(batch, conf.num_patches, conf.patch_size* conf.patch_size)
-    print('4'. patches.shape)
+    print('4', patches.shape)
     raise Exception('nö')
     return patches
 

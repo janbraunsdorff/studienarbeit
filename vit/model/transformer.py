@@ -18,6 +18,7 @@ class Transformer(nn.Module):
     def forward(self, encoded_patches):
         x1 = self.norm_1(encoded_patches)
         attention_output = self.mha(x1,x1,x1)
+        print('attention: ', attention_output[1].shape)
         x2 = attention_output[0] + encoded_patches
         x3 = self.norm_2(x2)
         x3 = self.mlp(x3)

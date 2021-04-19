@@ -24,4 +24,6 @@ class Transformer(nn.Module):
         x3 = self.mlp(x3)
         ret = x3 + x2
 
+        print(attention_output[1].shape)
+
         return ret, res

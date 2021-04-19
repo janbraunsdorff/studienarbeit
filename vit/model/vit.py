@@ -60,12 +60,9 @@ class ViT(nn.Module):
 
         att = self.patch_focus(att)
         prio = torch.argmax(att.view(-1, 256), 1)
-        print(prio)
         y = torch.div(prio, 16, rounding_mode='trunc')
-        print(x)
         x = torch.sub(prio, y*16)
-        print(y)
-        raise Exception('nö')
+    
 
         representation = self.norm_1(encoding)
         # representation_1:  torch.Size([256, 144, 64])

@@ -59,11 +59,8 @@ class ViT(nn.Module):
         # encode_patches = B x 144 x 64 
 
         att = self.patch_focus(att)
-        prio = torch.argmax(att).detach().item()
+        prio = torch.argmax(att.view(2, 16), 1)
         print(prio)
-        y = (int)(prio / 16)
-        x = (prio - (y*16))
-        print(prio, y, x)
         raise Exception('nö')
 
         representation = self.norm_1(encoding)

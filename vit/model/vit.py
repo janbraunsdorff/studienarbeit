@@ -49,7 +49,7 @@ class ViT(nn.Module):
         aug = augmentation.data_augmentation(x)
         # aug = B x 3 x 72 x 72
         patches = self.patches(x)
-        print('5', patches.shape())
+        print('5', patches.shape)
         raise Exception('nö')
 
         # patch =  B x 144 x 108

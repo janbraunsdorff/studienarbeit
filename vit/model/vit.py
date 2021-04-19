@@ -55,7 +55,7 @@ class ViT(nn.Module):
             encoding, att = t(encoding)
         # encode_patches = B x 144 x 64 
 
-        print(att.squeeze(1).reshape(16, 16).shape)
+        print(att.squeeze(1).reshape(-1, 16, 16).shape)
         print(torch.argmax(att[0]))
         raise Exception('nö')
 

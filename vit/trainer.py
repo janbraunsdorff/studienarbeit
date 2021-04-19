@@ -32,6 +32,13 @@ class Trainer():
             print()
             sys.stdout.flush()
 
+            print(' | save model...', end=' ')
+            torch.save(self.model, 'model/vit-bad.pth')
+            best_score = score
+            print('**done**', end='')
+            sys.stdout.flush()
+
+
     def train(self, epoch):
         self.model.train()
         eps = []

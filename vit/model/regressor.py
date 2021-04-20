@@ -28,7 +28,7 @@ class Regreesor(nn.Module):
         self.inceptionE_9 = InceptionE(1280)
         self.inceptionE_10 = InceptionE(2048)
 
-
+        self.avgpool = nn.AdaptiveAvgPool2d((1, 1))
         self.faltten = nn.Flatten()
 
         self.dense = nn.Linear(2048, 1000)
@@ -60,7 +60,11 @@ class Regreesor(nn.Module):
         x = self.inceptionE_9(x)
         x = self.inceptionE_10(x)
 
+        x = self.avgpool(x)
+        x = self.drop(x)
+
         x = self.faltten(x)
+        print(x.shape)
         x = self.dense(x)
         x = self.activate(x)
         x = self.drop(x)

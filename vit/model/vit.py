@@ -2,6 +2,7 @@ import torch.nn as nn
 import vit.model.data_augmentation as augmentation
 from vit.model.patches import PatchEncoder, Patches
 from vit.model.transformer import Transformer
+from vit.model.regressor import Regreesor
 import vit.model.config as conf
 import torch
 import numpy as np
@@ -15,9 +16,9 @@ class ViT(nn.Module):
 
         self.trashhold = torch.rand(1, requires_grad=True).to(conf.device)
 
-        self.to(conf.device)
-        
+        self.regressor = Regreesor()
 
+        self.to(conf.device)
         self.transformers = []
         for i in range(conf.transformer_layers):
             self.transformers.append(Transformer(conf.patch_size))
@@ -52,6 +53,7 @@ class ViT(nn.Module):
         mask[mask>=self.trashhold] = 1
         masked_image = mask * x
 
+        x = self.regressor(x)
 
         return x
 

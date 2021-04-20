@@ -62,7 +62,8 @@ class ViT(nn.Module):
         max_value = torch.max(t, dim=1)[0]
         t = t / max_value.view(-1,1)
         t = t.view(-1, 16, 16)
-        print(t.shape, '\n', t)
+        mask = self.scale_maks(t)
+        print(t.shape, mask.shape)
 
 
         return x

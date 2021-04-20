@@ -56,6 +56,7 @@ class ViT(nn.Module):
         print(mask)
         mask = mask - self.trashhold
         print(mask)
+        raise Exception('Nö')
         mask = torch.where(mask > 0, ones, zeros)
         masked_image = mask * x
 

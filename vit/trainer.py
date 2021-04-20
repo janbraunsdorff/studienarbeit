@@ -29,8 +29,7 @@ class Trainer():
                 torch.save(self.model, 'model/vit.pth')
                 best_score = score
                 print('**done**', end='')
-            sys.stdout.flush()
-            print(' Trashold: ', "{:.4}".format(self.model.trashhold.item()))
+            print()
             sys.stdout.flush()
 
 

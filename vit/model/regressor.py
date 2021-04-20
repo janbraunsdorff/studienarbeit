@@ -1,6 +1,6 @@
 import torch
 import torch.nn as nn
-from torchvision.models.inception import InceptionA, InceptionB, InceptionC
+from torchvision.models.inception import InceptionA, InceptionB, InceptionC, InceptionD, InceptionE
 import vit.model.config as conf
 
 class Regreesor(nn.Module):
@@ -16,14 +16,22 @@ class Regreesor(nn.Module):
         self.inceptionA_1 = InceptionA(64, 64)
         self.inceptionA_2 = InceptionA(288, 64)
         self.inceptionA_3 = InceptionA(288, 64)
+
         self.inceptionB_1 = InceptionB(288)
-        self.inceptionA_4 = InceptionA(768, 64)
-        self.inceptionA_5 = InceptionA(288, 64)
+
+        self.inceptionA_4 = InceptionC(768, 128)
+        self.inceptionA_5 = InceptionC(768, 160)
+        self.inceptionA_6 = InceptionC(768, 160)
+        self.inceptionA_7 = InceptionC(768, 192)
+
+        self.inceptionD_8 = InceptionD(768)
+        self.inceptionE_9 = InceptionD(1280)
+        self.inceptionE_10 = InceptionD(2048)
 
 
         self.faltten = nn.Flatten()
 
-        self.dense = nn.Linear(14_112, 1000)
+        self.dense = nn.Linear(2048, 1000)
         self.drop = nn.Dropout()
         self.out = nn.Linear(1000, 1)
 
@@ -40,9 +48,14 @@ class Regreesor(nn.Module):
         x = self.inceptionA_1(x)
         x = self.inceptionA_2(x)
         x = self.inceptionA_3(x)
+
         x = self.inceptionB_1(x)
+
         x = self.inceptionA_4(x)
         x = self.inceptionA_5(x)
+        x = self.inceptionA_6(x)
+        x = self.inceptionA_7(x)
+
         x = self.faltten(x)
         x = self.dense(x)
         x = self.activate(x)

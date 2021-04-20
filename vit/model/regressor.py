@@ -76,8 +76,8 @@ class Regreesor(nn.Module):
         x = self.dense_2(x)
         x = self.activate(x)
         x = self.drop(x)
-
         x = self.out(x)
+        x = self.activate(x)
 
 
         return x

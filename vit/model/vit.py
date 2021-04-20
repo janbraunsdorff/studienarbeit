@@ -49,8 +49,11 @@ class ViT(nn.Module):
         t = t / max_value.view(-1,1)
         t = t.view(-1, 16, 16)
         mask = self.scale_maks(t).unsqueeze(1)
-        mask[mask<self.trashhold] = 0
-        mask[mask>=self.trashhold] = 1
+
+        zeros = torch.zeros_like(mask, device=conf.device)
+        ones = torch.ones_like(mask, device=conf.device)
+
+        mask = torch.where(mask > self.parameters, ones, zeros)
         masked_image = mask * x
 
         x = self.regressor(x, sex)

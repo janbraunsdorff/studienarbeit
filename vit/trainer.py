@@ -34,7 +34,7 @@ class Trainer():
             print(' | save model...', end=' ')
             torch.save(self.model, 'model/vit-bad.pth')
             best_score = score
-            print('**done** Trashold: ', model.trashhold)
+            print('**done** Trashold: ', self.model.trashhold)
             sys.stdout.flush()
 
 

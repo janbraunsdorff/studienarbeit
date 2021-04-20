@@ -52,7 +52,7 @@ class ViT(nn.Module):
 
         zeros = torch.zeros_like(mask, device=conf.device)
         ones = torch.ones_like(mask, device=conf.device)
-
+        print(self.trashhold)
         print(mask)
         mask = mask - self.trashhold
         print(mask)

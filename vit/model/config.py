@@ -13,7 +13,7 @@ hidden_layers = [
     (project_dim, project_dim*2), 
     (project_dim*2, project_dim)
 ]
-transformer_layers = 12
+transformer_layers = 10
 res_file = 'result-inc-vit.csv'
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")

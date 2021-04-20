@@ -6,6 +6,7 @@ from vit.model.regressor import Regreesor
 import vit.model.config as conf
 import torch
 import numpy as np
+from torch.autograd import Variable
 
 class ViT(nn.Module):
     def __init__(self):
@@ -14,14 +15,18 @@ class ViT(nn.Module):
         self.encode_patches = PatchEncoder(num_patches=conf.num_patches, project_dim=conf.project_dim)
         self.norm_1 = nn.BatchNorm1d(num_features=256, eps=1e-6)
 
-        self.trashhold = nn.Parameter(torch.rand(1, requires_grad=True))
+        # self.trashhold = nn.Parameter(torch.rand(1, requires_grad=True))
+        self.trashhold = Variable(torch.rand(1), requires_grad=True)
 
         self.regressor = Regreesor()
 
-        self.to(conf.device)
         self.transformers = []
         for i in range(conf.transformer_layers):
             self.transformers.append(Transformer(conf.patch_size))
+
+
+        self.to(conf.device)
+        
 
 
 
@@ -54,8 +59,6 @@ class ViT(nn.Module):
         ones = torch.ones_like(mask, device=conf.device)
         mask = mask - self.trashhold
         mask = torch.where(mask > 0, ones, zeros)
-        print(mask)
-        raise Exception('Nö')
         masked_image = mask * x
 
         x = self.regressor(x, sex)

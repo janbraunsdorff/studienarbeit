@@ -55,7 +55,7 @@ class ViT(nn.Module):
 
         print(mask.shape, zeros.shape, ones.shape)
 
-        mask = torch.where(mask > self.parameters, ones, zeros)
+        mask = torch.where(mask > self.parameters.item(), ones, zeros)
         masked_image = mask * x
 
         x = self.regressor(x, sex)

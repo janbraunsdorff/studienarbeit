@@ -21,12 +21,12 @@ class Regreesor(nn.Module):
 
         self.inceptionA_4 = InceptionC(768, 128)
         self.inceptionA_5 = InceptionC(768, 160)
-        #self.inceptionA_6 = InceptionC(768, 160)
-        #self.inceptionA_7 = InceptionC(768, 192)
+        self.inceptionA_6 = InceptionC(768, 160)
+        self.inceptionA_7 = InceptionC(768, 192)
 
         self.inceptionD_8 = InceptionD(768)
         self.inceptionE_9 = InceptionE(1280)
-        #self.inceptionE_10 = InceptionE(2048)
+        self.inceptionE_10 = InceptionE(2048)
 
         self.avgpool = nn.AdaptiveAvgPool2d((1, 1))
         self.faltten = nn.Flatten()
@@ -55,12 +55,12 @@ class Regreesor(nn.Module):
 
         x = self.inceptionA_4(x)
         x = self.inceptionA_5(x)
-        #x = self.inceptionA_6(x)
-        #x = self.inceptionA_7(x)
+        x = self.inceptionA_6(x)
+        x = self.inceptionA_7(x)
 
         x = self.inceptionD_8(x)
         x = self.inceptionE_9(x)
-        #x = self.inceptionE_10(x)
+        x = self.inceptionE_10(x)
 
         x = self.avgpool(x)
         x = self.drop(x)

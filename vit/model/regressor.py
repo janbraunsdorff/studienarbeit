@@ -25,8 +25,8 @@ class Regreesor(nn.Module):
         self.inceptionA_7 = InceptionC(768, 192)
 
         self.inceptionD_8 = InceptionD(768)
-        self.inceptionE_9 = InceptionD(1280)
-        self.inceptionE_10 = InceptionD(2048)
+        self.inceptionE_9 = InceptionE(1280)
+        self.inceptionE_10 = InceptionE(2048)
 
 
         self.faltten = nn.Flatten()

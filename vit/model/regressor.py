@@ -64,7 +64,6 @@ class Regreesor(nn.Module):
         x = self.drop(x)
 
         x = self.faltten(x)
-        print(x.shape)
         x = self.dense(x)
         x = self.activate(x)
         x = self.drop(x)

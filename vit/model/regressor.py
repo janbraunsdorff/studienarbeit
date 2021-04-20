@@ -71,7 +71,7 @@ class Regreesor(nn.Module):
         x = self.drop(x)
 
         print(y.shape)
-        y = self.age(y)
+        y = self.age(y.view(-1, 1))
         x = torch.cat((x, y), 1)
 
         x = self.dense_2(x)

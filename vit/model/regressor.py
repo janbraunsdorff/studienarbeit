@@ -70,6 +70,7 @@ class Regreesor(nn.Module):
         x = self.activate(x)
         x = self.drop(x)
 
+        print(y.shape)
         y = self.age(y)
         x = torch.cat((x, y), 1)
 

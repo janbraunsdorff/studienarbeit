@@ -64,38 +64,14 @@ class ViT(nn.Module):
 
         max_value = torch.max(t, dim=1)[0]
         t = t / max_value.view(16,1)
-        # 16, 256
-
-        representation = self.norm_1(encoding)
-        # representation_1:  torch.Size([256, 144, 64])
-        representation = self.flatten(representation)
-        # representation_2:  torch.Size([256, 9216])
-        representation = self.drop(representation)
-        # representation_3:  torch.Size([256, 9216])
-
-        y = self.mlp_layer_1(representation)
-        y = self.activate(y)
-        y = self.mlp_drop_1(y)
-
-        y = self.mlp_layer_2(y)
-        y = self.activate(y)
-        y = self.mlp_drop_2(y)
+        print(t.shape, '\n', t)
 
 
-        sex = self.dense32(sex.unsqueeze(1).float())
-        x = torch.cat((y, sex), 1)
-
-
-        x = self.activate(x)
-        x = self.drop_1(x)
-        x = self.dense1000_1(x)
-        x = self.activate(x)
-
-        #x = self.dense1000_2(x)
-        #x = self.activate(x)
-        #x = self.drop_2(x)
-
-        #x = self.dense1000_4(x)
-        #x = self.activate(x)
-        
         return x
+
+    def scale_maks(self, mask):
+        t = mask.repeat_interleave(2).view(-1, 16, 32).repeat(1, 1, 2).view(-1,32,32)
+        t = t.repeat_interleave(2).view(-1, 32,64).repeat(1,1,2).view(-1,64,64)
+        t = t.repeat_interleave(2).view(-1, 64,128).repeat(1,1,2).view(-1,128,128)
+        t = t.repeat_interleave(2).view(-1, 128,256).repeat(1,1,2).reshape(-1,256,256)
+        return t

@@ -1,8 +1,8 @@
 import torch
 
-lr = 1e-4
+lr = 1e-5
 weight_decay = 1e-5
-batch_szie = 48
+batch_szie = 16
 num_epoch = 10_000
 image_size = 256
 patch_size = 16
@@ -13,9 +13,10 @@ hidden_layers = [
     (project_dim, project_dim*2), 
     (project_dim*2, project_dim*2), 
     (project_dim*2, project_dim*2), 
+    (project_dim*2, project_dim*2), 
     (project_dim*2, project_dim)
 ]
-transformer_layers = 8
+transformer_layers = 12
 res_file = 'result-inc-vit.csv'
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")

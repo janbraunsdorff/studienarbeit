@@ -56,6 +56,10 @@ class Regreesor(nn.Module):
         x = self.inceptionA_6(x)
         x = self.inceptionA_7(x)
 
+        x = self.inceptionD_8(x)
+        x = self.inceptionE_9(x)
+        x = self.inceptionE_10(x)
+
         x = self.faltten(x)
         x = self.dense(x)
         x = self.activate(x)

@@ -21,7 +21,7 @@ class Regreesor(nn.Module):
         x = self.activate(x)
         x = self.conv_2(x)
         x = self.activate(x)
-        x = self.conv_2(x)
+        x = self.conv_3(x)
         x = self.activate(x)
         x = self.max_Pool(x)
 

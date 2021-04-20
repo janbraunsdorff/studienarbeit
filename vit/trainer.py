@@ -30,7 +30,7 @@ class Trainer():
                 best_score = score
                 print('**done**', end='')
             sys.stdout.flush()
-            print('Trashold: ', "{:.4}".format(self.model.trashhold.item()))
+            print(' Trashold: ', "{:.4}".format(self.model.trashhold.item()))
             sys.stdout.flush()
 
 

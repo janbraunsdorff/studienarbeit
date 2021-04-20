@@ -69,7 +69,7 @@ class ViT(nn.Module):
         mask[mask>=self.trashhold] = 1
         masked_image = mask * x
         print(masked_image.shape)
-        print(torch.max(masked_image))
+        print(masked_image[0])
 
 
         return x

@@ -14,7 +14,7 @@ class ViT(nn.Module):
         self.encode_patches = PatchEncoder(num_patches=conf.num_patches, project_dim=conf.project_dim)
         self.norm_1 = nn.BatchNorm1d(num_features=256, eps=1e-6)
 
-        self.trashhold = nn.Parameter(torch.Tensor([0.5]), requires_grad=True)
+        self.trashhold = nn.Parameter(torch.rand(1, requires_grad=True))
 
         self.regressor = Regreesor()
 

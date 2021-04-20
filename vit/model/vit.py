@@ -53,7 +53,7 @@ class ViT(nn.Module):
         mask[mask>=self.trashhold] = 1
         masked_image = mask * x
 
-        x = self.regressor(x)
+        x = self.regressor(x, sex)
 
         return x
 

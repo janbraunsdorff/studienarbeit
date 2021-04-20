@@ -12,24 +12,6 @@ class ViT(nn.Module):
         self.patches = Patches(patch_size=conf.patch_size)
         self.encode_patches = PatchEncoder(num_patches=conf.num_patches, project_dim=conf.project_dim)
         self.norm_1 = nn.BatchNorm1d(num_features=256, eps=1e-6)
-        self.flatten = nn.Flatten()
-        self.drop = nn.Dropout(p=0.5)
-
-        self.mlp_layer_1 = nn.Linear(in_features=conf.project_dim * conf.num_patches, out_features=4096)
-        self.mlp_drop_1 = nn.Dropout(p=0.1)
-        self.mlp_layer_2 = nn.Linear(in_features=4096, out_features=2048)
-        self.mlp_drop_2 = nn.Dropout(p=0.1)
-
-        self.activate = nn.GELU()
-        self.dense32 = nn.Linear(in_features=1, out_features=256)
-
-        self.dense1000_1 = nn.Linear(2048+256, 1)
-        #self.dense1000_2 = nn.Linear(1000, 1000)
-        #self.dense1000_4 = nn.Linear(1000, 1)
-
-        self.drop_1 = nn.Dropout()
-        self.drop_2 = nn.Dropout()
-        self.drop_3 = nn.Dropout()
 
         self.trashhold = torch.rand(1, requires_grad=True).to(conf.device)
 
@@ -59,8 +41,9 @@ class ViT(nn.Module):
             encoding = t(encoding)
         # encode_patches = B x 144 x 64 
 
-        t = torch.mean(encoding, 2)
+        encoding = self.norm_1(encoding)
 
+        t = torch.mean(encoding, 2)
         max_value = torch.max(t, dim=1)[0]
         t = t / max_value.view(-1,1)
         t = t.view(-1, 16, 16)
@@ -68,8 +51,6 @@ class ViT(nn.Module):
         mask[mask<self.trashhold] = 0
         mask[mask>=self.trashhold] = 1
         masked_image = mask * x
-        print(masked_image.shape)
-        print(masked_image[0])
 
 
         return x

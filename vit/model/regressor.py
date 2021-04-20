@@ -15,6 +15,10 @@ class Regreesor(nn.Module):
 
         self.inceptionA_1 = InceptionA(64, 64)
         self.inceptionA_2 = InceptionA(288, 64)
+        self.inceptionA_3 = InceptionA(288, 64)
+        self.inceptionB_1 = InceptionB(288, 64)
+
+        self.faltten = nn.Flatten()
 
     def forward(self, x):
         x = self.norm(x)
@@ -27,8 +31,10 @@ class Regreesor(nn.Module):
         x = self.max_Pool(x)
         
         x = self.inceptionA_1(x)
-        print(x.shape)
         x = self.inceptionA_2(x)
+        x = self.inceptionA_3(x)
+        print(x.shape)
+        x = self.faltten(x)
         print(x.shape)
 
         raise Exception('Regressor end')

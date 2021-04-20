@@ -10,10 +10,10 @@ class Regreesor(nn.Module):
         self.norm = nn.BatchNorm2d(num_features=1)
         self.conv_1 = nn.Conv2d(in_channels=1, out_channels=32, kernel_size=(2,2))
         self.conv_2 = nn.Conv2d(in_channels=32, out_channels=64, kernel_size=(2,2))
-        self.conv_3 = nn.Conv2d(in_channels=64, out_channels=128, kernel_size=(2,2))
+        self.conv_3 = nn.Conv2d(in_channels=64, out_channels=64, kernel_size=(2,2))
         self.max_Pool = nn.MaxPool2d(kernel_size=(2,2))
 
-        self.inceptionA_1 = InceptionA(128, 256)
+        self.inceptionA_1 = InceptionA(64, 64)
         self.inceptionA_2 = InceptionA(480, 256)
 
     def forward(self, x):

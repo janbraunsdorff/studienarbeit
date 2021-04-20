@@ -15,9 +15,9 @@ class Regreesor(nn.Module):
 
         self.inceptionA_1 = InceptionA(64, 32)
         self.inceptionA_2 = InceptionA(256, 32)
-        self.inceptionA_3 = InceptionA(256, 32)
+        self.inceptionA_3 = InceptionA(256, 64)
 
-        self.inceptionB_1 = InceptionB(256)
+        self.inceptionB_1 = InceptionB(768)
 
         self.inceptionA_4 = InceptionC(768, 128)
         self.inceptionA_5 = InceptionC(768, 160)

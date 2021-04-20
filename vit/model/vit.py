@@ -16,7 +16,7 @@ class ViT(nn.Module):
         self.norm_1 = nn.BatchNorm1d(num_features=256, eps=1e-6)
 
         # self.trashhold = nn.Parameter(torch.rand(1, requires_grad=True))
-        self.trashhold = Variable(torch.rand(1), requires_grad=True)
+        self.trashhold = Variable(torch.rand(1), requires_grad=True).to(conf.device)
 
         self.regressor = Regreesor()
 

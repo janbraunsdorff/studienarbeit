@@ -13,9 +13,9 @@ class Regreesor(nn.Module):
         self.conv_3 = nn.Conv2d(in_channels=32, out_channels=64, kernel_size=(3,3), stride=2)
         self.max_Pool = nn.MaxPool2d(kernel_size=(2,2))
 
-        self.inceptionA_1 = InceptionA(64, 64)
-        self.inceptionA_2 = InceptionA(288, 64)
-        self.inceptionA_3 = InceptionA(288, 64)
+        self.inceptionA_1 = InceptionA(64, 32)
+        self.inceptionA_2 = InceptionA(288, 32)
+        self.inceptionA_3 = InceptionA(288, 32)
 
         self.inceptionB_1 = InceptionB(288)
 
@@ -53,12 +53,12 @@ class Regreesor(nn.Module):
 
         x = self.inceptionA_4(x)
         x = self.inceptionA_5(x)
-        x = self.inceptionA_6(x)
-        x = self.inceptionA_7(x)
+        #x = self.inceptionA_6(x)
+        #x = self.inceptionA_7(x)
 
         x = self.inceptionD_8(x)
         x = self.inceptionE_9(x)
-        x = self.inceptionE_10(x)
+        #x = self.inceptionE_10(x)
 
         x = self.avgpool(x)
         x = self.drop(x)

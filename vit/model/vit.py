@@ -31,6 +31,8 @@ class ViT(nn.Module):
         self.drop_2 = nn.Dropout()
         self.drop_3 = nn.Dropout()
 
+        self.trashhold = torch.rand(1, requires_grad=True)
+
         self.to(conf.device)
         
 
@@ -63,6 +65,8 @@ class ViT(nn.Module):
         t = t / max_value.view(-1,1)
         t = t.view(-1, 16, 16)
         mask = self.scale_maks(t).unsqueeze(1)
+        mask[mask<self.trashhold] = 0
+        mask[mask>=self.trashhold] = 1
         masked_image = mask * x
         print(masked_image.shape)
         print(masked_image)

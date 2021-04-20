@@ -59,7 +59,7 @@ class ViT(nn.Module):
         ones = torch.ones_like(mask, device=conf.device)
 
         mask =  torch.sub(mask, self.trashhold)
-        print(self.trashhold)
+        print(self.trashhold.grad)
         mask = torch.where(mask > 0, ones, zeros)
         masked_image = mask * x
 

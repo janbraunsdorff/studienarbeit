@@ -24,7 +24,8 @@ class Regreesor(nn.Module):
         x = self.conv_3(x)
         x = self.activate(x)
         x = self.max_Pool(x)
-
+        
+        print(x.shape)
         x = self.inceptionA_1(x)
         print(x.shape)
 

@@ -63,7 +63,7 @@ class ViT(nn.Module):
         t = t / max_value.view(-1,1)
         t = t.view(-1, 16, 16)
         mask = self.scale_maks(t)
-        print(t.shape, mask.shape)
+        print(t.shape, mask.shape, x.shape)
 
 
         return x

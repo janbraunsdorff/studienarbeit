@@ -53,12 +53,12 @@ class Regreesor(nn.Module):
 
         x = self.inceptionA_4(x)
         x = self.inceptionA_5(x)
-        #x = self.inceptionA_6(x)
-        #x = self.inceptionA_7(x)
+        x = self.inceptionA_6(x)
+        x = self.inceptionA_7(x)
 
         x = self.inceptionD_8(x)
         x = self.inceptionE_9(x)
-        #x = self.inceptionE_10(x)
+        x = self.inceptionE_10(x)
 
         x = self.avgpool(x)
         x = self.drop(x)

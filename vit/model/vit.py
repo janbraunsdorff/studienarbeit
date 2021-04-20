@@ -15,9 +15,6 @@ class ViT(nn.Module):
         self.encode_patches = PatchEncoder(num_patches=conf.num_patches, project_dim=conf.project_dim)
         self.norm_1 = nn.BatchNorm1d(num_features=256, eps=1e-6)
 
-        # self.trashhold = nn.Parameter(torch.rand(1, requires_grad=True))
-        self.trashhold = Variable(torch.rand(1), requires_grad=True).to(conf.device)
-
         self.regressor = Regreesor()
 
         self.transformers = []
@@ -58,9 +55,7 @@ class ViT(nn.Module):
         zeros = torch.zeros_like(mask, device=conf.device)
         ones = torch.ones_like(mask, device=conf.device)
 
-        mask =  torch.sub(mask, self.trashhold*1)
-        print(self.trashhold)
-        self.trashhold.retain_grad()
+        mask =  torch.sub(mask, 0.45)
         mask = torch.where(mask > 0, ones, zeros)
         masked_image = mask * x
 

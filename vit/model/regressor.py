@@ -31,11 +31,13 @@ class Regreesor(nn.Module):
         self.avgpool = nn.AdaptiveAvgPool2d((1, 1))
         self.faltten = nn.Flatten()
 
-        self.dense = nn.Linear(2048, 1000)
+        self.dense_1 = nn.Linear(2048, 1000)
+        self.dense_2 = nn.Linear(1032, 1000)
+        self.age = nn.Linear(1, 32)
         self.drop = nn.Dropout()
         self.out = nn.Linear(1000, 1)
 
-    def forward(self, x):
+    def forward(self, x, y):
         x = self.norm(x)
         x = self.conv_1(x)
         x = self.activate(x)
@@ -64,9 +66,17 @@ class Regreesor(nn.Module):
         x = self.drop(x)
 
         x = self.faltten(x)
-        x = self.dense(x)
+        x = self.dense_1(x)
         x = self.activate(x)
         x = self.drop(x)
+
+        y = self.age(y)
+        x = torch.cat((x, y), 1)
+
+        x = self.dense_2(x)
+        x = self.activate(x)
+        x = self.drop(x)
+
         x = self.out(x)
 
 

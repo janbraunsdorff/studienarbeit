@@ -17,8 +17,15 @@ class Regreesor(nn.Module):
         self.inceptionA_2 = InceptionA(288, 64)
         self.inceptionA_3 = InceptionA(288, 64)
         self.inceptionB_1 = InceptionB(288)
+        self.inceptionA_4 = InceptionA(288, 64)
+        self.inceptionA_5 = InceptionA(288, 64)
+
 
         self.faltten = nn.Flatten()
+
+        self.dense = nn.Linear(200, 1000)
+        self.drop = nn.Dropout()
+        self.out = nn.Linear(1000, 1)
 
     def forward(self, x):
         x = self.norm(x)
@@ -33,9 +40,19 @@ class Regreesor(nn.Module):
         x = self.inceptionA_1(x)
         x = self.inceptionA_2(x)
         x = self.inceptionA_3(x)
+        x = self.inceptionB_1(x)
+        print(x.shape)
+        x = self.inceptionA_4(x)
+        print(x.shape)
+        x = self.inceptionA_5(x)
         print(x.shape)
         x = self.faltten(x)
         print(x.shape)
+        x = self.dense(x)
+        x = self.activate(x)
+        x = self.drop(x)
+        x = self.out(x)
+
 
         raise Exception('Regressor end')
         

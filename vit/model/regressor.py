@@ -50,8 +50,7 @@ class Regreesor(nn.Module):
         x = self.out(x)
 
 
-        raise Exception('Regressor end')
-        
+        return x
 
 
 

@@ -31,7 +31,7 @@ class ViT(nn.Module):
         self.drop_2 = nn.Dropout()
         self.drop_3 = nn.Dropout()
 
-        self.trashhold = torch.rand(1, requires_grad=True)
+        self.trashhold = torch.rand(1, requires_grad=True).to(conf.device)
 
         self.to(conf.device)
         

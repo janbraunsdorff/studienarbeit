@@ -32,8 +32,9 @@ class Regreesor(nn.Module):
         self.faltten = nn.Flatten()
 
         self.dense_1 = nn.Linear(2048, 1000)
-        self.dense_2 = nn.Linear(1096, 1000)
-        self.age = nn.Linear(1, 96)
+        self.dense_2 = nn.Linear(1064, 1000)
+        self.dense_3 = nn.Linear(1000, 1000)
+        self.age = nn.Linear(1, 64)
         self.drop = nn.Dropout()
         self.out = nn.Linear(1000, 1)
 
@@ -76,6 +77,12 @@ class Regreesor(nn.Module):
         x = self.dense_2(x)
         x = self.activate(x)
         x = self.drop(x)
+
+        x = self.dense_3(x)
+        x = self.activate(x)
+        x = self.drop(x)
+
+
         x = self.out(x)
         x = self.activate(x)
 

@@ -51,7 +51,7 @@ class ViT(nn.Module):
 
         t -= t.min(1, keepdim=True)[0]
         t /= t.max(1, keepdim=True)[0]
-        mask = scale_maks(t).unsqueeze(1)
+        mask = self.scale_maks(t).unsqueeze(1)
 
         zeros = torch.zeros_like(mask)
         ones = torch.ones_like(mask)

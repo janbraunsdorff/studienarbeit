@@ -35,7 +35,7 @@ class ViT(nn.Module):
 
         sex = sex.float()
         # x =  B x 3 x 72 x 72
-        aug = augmentation.data_augmentation(x)
+        #aug = augmentation.data_augmentation(x)
         # aug = B x 3 x 72 x 72
         patches = self.patches(x)
         # patch =  B x 144 x 108
@@ -61,7 +61,9 @@ class ViT(nn.Module):
 
         mask =  torch.sub(mask, 0.55)
         mask = torch.where(mask < 0, ones, zeros)
-        masked_image = mask * x
+        masked_image = mask * ((x - 1)*-1)
+
+        
 
         x = self.regressor(masked_image, sex)
 

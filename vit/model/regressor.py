@@ -14,7 +14,7 @@ class Regreesor(nn.Module):
         self.max_Pool = nn.MaxPool2d(kernel_size=(2,2))
 
         self.inceptionA_1 = InceptionA(64, 32)
-        self.inceptionA_2 = InceptionA(256, 32)
+        self.inceptionA_2 = InceptionA(256, 64)
         #self.inceptionA_3 = InceptionA(256, 64)
 
         self.inceptionB_1 = InceptionB(288)

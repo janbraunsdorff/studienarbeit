@@ -61,7 +61,7 @@ class ViT(nn.Module):
 
         mask =  torch.sub(mask, 0.55)
         mask = torch.where(mask < 0, ones, zeros)
-        masked_image = mask * ((x - 1)*-1)
+        masked_image = mask * x
 
         
 

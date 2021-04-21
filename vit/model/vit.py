@@ -40,6 +40,9 @@ class ViT(nn.Module):
         encoding = self.encode_patches(patches)
         # encoding = B x 144 x 64
 
+        print(torch.max(encoding), torch.min(encoding))
+        raise Exception('Nä')
+
         for t in self.transformers:
             encoding = t(encoding)
         # encode_patches = B x 144 x 64 

@@ -60,11 +60,6 @@ class ViT(nn.Module):
         mask = torch.where(mask > 0, ones, zeros)
         masked_image = mask * x
 
-        print(masked_image.shape)
-        print(x.shape)
-        raise Exception('Nö')
-
-
         x = self.regressor(masked_image, sex)
 
         return x

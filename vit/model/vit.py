@@ -31,6 +31,10 @@ class ViT(nn.Module):
     def forward(self, x, sex):
         # x =  B x 3 x 72 x 72
         x = x / 255.0
+        print(torch.max(x), torch.min(x))
+        raise Exception('Nä')
+
+
         sex = sex.float()
         # x =  B x 3 x 72 x 72
         aug = augmentation.data_augmentation(x)
@@ -40,8 +44,6 @@ class ViT(nn.Module):
         encoding = self.encode_patches(patches)
         # encoding = B x 144 x 64
 
-        print(torch.max(encoding), torch.min(encoding))
-        raise Exception('Nä')
 
         for t in self.transformers:
             encoding = t(encoding)

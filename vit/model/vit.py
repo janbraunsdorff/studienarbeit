@@ -61,6 +61,7 @@ class ViT(nn.Module):
         masked_image = mask * x
 
         print(masked_image.shape)
+        print(x.shape)
         raise Exception('Nö')
 
 

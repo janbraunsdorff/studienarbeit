@@ -47,19 +47,24 @@ class ViT(nn.Module):
         encoding = self.norm_1(encoding)
 
         t = torch.mean(encoding, 2)
-        max_value = torch.max(t, dim=1)[0]
-        t = t / max_value.view(-1,1)
         t = t.view(-1, 16, 16)
-        mask = self.scale_maks(t).unsqueeze(1)
 
-        zeros = torch.zeros_like(mask, device=conf.device)
-        ones = torch.ones_like(mask, device=conf.device)
+        t -= t.min(1, keepdim=True)[0]
+        t /= t.max(1, keepdim=True)[0]
+        mask = scale_maks(t).unsqueeze(1)
+
+        zeros = torch.zeros_like(mask)
+        ones = torch.ones_like(mask)
 
         mask =  torch.sub(mask, 0.45)
         mask = torch.where(mask > 0, ones, zeros)
         masked_image = mask * x
 
-        x = self.regressor(x, sex)
+        print(masked_image.shape)
+        raise Exception('Nö')
+
+
+        x = self.regressor(masked_image, sex)
 
         return x
 

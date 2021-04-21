@@ -31,11 +31,11 @@ class ViT(nn.Module):
     def forward(self, x, sex):
         # x =  B x 3 x 72 x 72
         x = x / 255.0
-        x = (x - 1)*-1
+        # x = (x - 1)*-1
 
         sex = sex.float()
         # x =  B x 3 x 72 x 72
-        #aug = augmentation.data_augmentation(x)
+        aug = augmentation.data_augmentation(x)
         # aug = B x 3 x 72 x 72
         patches = self.patches(x)
         # patch =  B x 144 x 108

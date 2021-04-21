@@ -31,9 +31,7 @@ class ViT(nn.Module):
     def forward(self, x, sex):
         # x =  B x 3 x 72 x 72
         x = x / 255.0
-        print(torch.max(x), torch.min(x))
-        raise Exception('Nä')
-
+        x = (x - 1)*-1
 
         sex = sex.float()
         # x =  B x 3 x 72 x 72

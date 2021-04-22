@@ -38,7 +38,7 @@ model = Net(in_channels=1)
 model = model.to(conf.device) 
 print('**done** \nload data...', end='')
 
-train_loader, val_loader =  benchmark(load_data, path, conf.batch_szie)
+train_loader, val_loader =  benchmark(load_data, path, conf.batch_size)
 
 print('**done** \ncreate Trainer...', end='')
 trainer = Trainer(model, train_loader, val_loader)

@@ -13,7 +13,6 @@ class LambdaBottleneck(nn.Module):
         # Parameter
         self.stride = stride
         width = int(planes * (base_width / 64.)) * groups
-        print(width)
 
         self.conv1 =  nn.Conv2d(inplanes, planes, kernel_size=1, stride=1, bias=False)
         self.bn1 = nn.BatchNorm2d(width)

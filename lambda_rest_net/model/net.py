@@ -1,6 +1,6 @@
 import torch
 import torch.nn as nn
-from lambda_rest_net.model.lambda_res_net import LambdaResNet
+from lambda_rest_net.model.lambda_res_net import lambda_resnet50
 
 class Net(nn.Module):
     def __init__(self, in_channels=3):
@@ -12,7 +12,7 @@ class Net(nn.Module):
 
         # Image
         self.conv_in = nn.Conv2d(in_channels=in_channels, out_channels=res_net_in, kernel_size=1, stride=1, bias=False)
-        self.resnet = LambdaResNet(in_channels=res_net_in, layers=[3,4,6,3], num_classes=res_net_out)
+        self.resnet = lambda_resnet50(num_classes=res_net_out, channel_in=1)
 
         # Age
         self.age = nn.Linear(in_features=1, out_features=age_nurones)

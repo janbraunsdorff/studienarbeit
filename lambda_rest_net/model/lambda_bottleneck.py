@@ -6,29 +6,40 @@ from torch import Tensor
 
 from lambda_rest_net.model.lambda_layer import LambdaLayer
 
-class LambdaBottleneck(nn.Module):
-    expansion: int = 4
-    def __init__(self, inplanes: int, planes: int, stride: int = 1, downsample: Optional[nn.Module] = None, groups: int = 1, base_width: int = 64, dilation: int = 1, norm_layer: Optional[Callable[..., nn.Module]] = None) :
-        super(LambdaBottleneck, self).__init__()
-        # Parameter
-        self.stride = stride
+def conv3x3(in_planes, out_planes, stride=1, groups=1, dilation=1):
+    """3x3 convolution with padding"""
+    return nn.Conv2d(in_planes, out_planes, kernel_size=3, stride=stride,
+                     padding=dilation, groups=groups, bias=False, dilation=dilation)
+
+
+def conv1x1(in_planes, out_planes, stride=1):
+    """1x1 convolution"""
+    return nn.Conv2d(in_planes, out_planes, kernel_size=1, stride=stride, bias=False)
+
+
+
+class Bottleneck(nn.Module):
+    expansion = 4
+
+    def __init__(self, inplanes, planes, stride=1, downsample=None, groups=1,
+                 base_width=64, dilation=1, norm_layer=None, size=None):
+        super(Bottleneck, self).__init__()
+        if norm_layer is None:
+            norm_layer = nn.BatchNorm2d
         width = int(planes * (base_width / 64.)) * groups
-
-        self.conv1 =  nn.Conv2d(inplanes, planes, kernel_size=1, stride=1, bias=False)
-        self.bn1 = nn.BatchNorm2d(width)
-        self.conv2 = LambdaLayer(dim=width, dim_out=width, r = 23, dim_k=16, heads=4, dim_u=4)
-        self.down = nn.AvgPool2d(kernel_size=3, stride=2)
-        self.bn2 = nn.BatchNorm2d(width)
-        self.conv3 = nn.Conv2d(width, planes * self.expansion, kernel_size=1, stride=stride, bias=False)
-        self.bn3 = nn.BatchNorm2d(planes * self.expansion)
+        # Both self.conv2 and self.downsample layers downsample the input when stride != 1
+        self.conv1 = conv1x1(inplanes, width)
+        self.bn1 = norm_layer(width)
+        #self.conv2 = conv3x3(width, width, stride, groups, dilation)
+        self.conv2 = LambdaLayer(width, m=size, stride=stride)
+        self.bn2 = norm_layer(width)
+        self.conv3 = conv1x1(width, planes * self.expansion)
+        self.bn3 = norm_layer(planes * self.expansion)
         self.relu = nn.ReLU(inplace=True)
-
-        # functions
         self.downsample = downsample
+        self.stride = stride
 
-
-
-    def forward(self, x: Tensor) -> Tensor:
+    def forward(self, x):
         identity = x
 
         out = self.conv1(x)
@@ -36,18 +47,16 @@ class LambdaBottleneck(nn.Module):
         out = self.relu(out)
 
         out = self.conv2(out)
-        out = self.down(out)
         out = self.bn2(out)
         out = self.relu(out)
 
         out = self.conv3(out)
         out = self.bn3(out)
 
-        
         if self.downsample is not None:
             identity = self.downsample(x)
 
         out += identity
         out = self.relu(out)
 
-        return out
+

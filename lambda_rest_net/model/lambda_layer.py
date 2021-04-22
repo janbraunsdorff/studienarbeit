@@ -3,7 +3,7 @@ from torch import nn, einsum
 from einops import rearrange
 
 class LambdaLayer(nn.Module):
-    def __init__(self, d, dk=16, du=1, Nh=4, m=None, r=23, stride=1):
+    def __init__(self, d, dk=8, du=1, Nh=4, m=None, r=23, stride=1):
         super(LambdaLayer, self).__init__()
         self.d = d
         self.dk = dk

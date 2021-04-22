@@ -4,7 +4,7 @@ from einops import rearrange
 from typing import Type, Any, Callable, Union, List, Optional
 from torch import Tensor
 
-from lambda_rest_net.model.lambda_ayer import LambdaLayer
+from lambda_rest_net.model.lambda_layer import LambdaLayer
 
 class LambdaBottleneck(nn.Module):
     expansion: int = 4

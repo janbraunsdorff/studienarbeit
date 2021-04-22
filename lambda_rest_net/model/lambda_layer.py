@@ -5,6 +5,7 @@ from einops import rearrange
 class LambdaLayer(nn.Module):
     def __init__(self, dim, *, dim_k, n = None, r = None, heads = 4, dim_out = None, dim_u = 1):
         super(LambdaLayer, self).__init__()
+        print('t', dim_out , heads)
         assert (dim_out % heads) == 0, 'values dimension must be divisible by number of heads for multi-head query'
         assert (r % 2) == 1, 'Receptive kernel size should be odd'
 

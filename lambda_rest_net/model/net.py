@@ -26,9 +26,6 @@ class Net(nn.Module):
         # Out 
         self.out = nn.Linear(in_features=1000, out_features=1)
 
-        
-
-
 
     def build_regessor(self, in_features, out_features):
         nn.Sequential(
@@ -40,6 +37,8 @@ class Net(nn.Module):
 
     def forward(self, x, y):
         x = x / 255.0
+        x = x.float()
+        y = y.float()
         x = self.conv_in(x)
         x = self.resnet(x)
 

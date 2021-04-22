@@ -12,7 +12,7 @@ class Net(nn.Module):
 
         # Image
         self.conv_in = nn.Conv2d(in_channels=in_channels, out_channels=res_net_in, kernel_size=1, stride=1, bias=False)
-        self.resnet = lambda_resnet50(num_classes=res_net_out, channel_in=1)
+        self.resnet = lambda_resnet50(num_classes=res_net_out, channel_in=res_net_in)
 
         # Age
         self.age = nn.Linear(in_features=1, out_features=age_nurones)
@@ -39,7 +39,7 @@ class Net(nn.Module):
         x = x.float()
         x = x / 255.0
         y = y.float()
-        # x = self.conv_in(x)
+        x = self.conv_in(x)
         x = self.resnet(x)
 
         y = self.age(y.view(-1, 1))

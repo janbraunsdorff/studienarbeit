@@ -16,7 +16,7 @@ class LambdaBottleneck(nn.Module):
 
         self.conv1 =  nn.Conv2d(inplanes, planes, kernel_size=1, stride=1, bias=False)
         self.bn1 = nn.BatchNorm2d(width)
-        self.conv2 = LambdaLayer(dim=width, dim_out=width, r = 15, dim_k=16, heads=4, dim_u=4)
+        self.conv2 = LambdaLayer(dim=width, dim_out=width, r = 9, dim_k=16, heads=4, dim_u=4)
         self.bn2 = nn.BatchNorm2d(width)
         self.conv3 = nn.Conv2d(width, planes * self.expansion, kernel_size=1, stride=stride, bias=False)
         self.bn3 = nn.BatchNorm2d(planes * self.expansion)

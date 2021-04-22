@@ -39,7 +39,7 @@ class Net(nn.Module):
         x = x.float()
         x = x / 255.0
         y = y.float()
-        x = self.conv_in(x)
+        # x = self.conv_in(x)
         x = self.resnet(x)
 
         y = self.age(y.view(-1, 1))

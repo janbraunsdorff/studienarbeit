@@ -42,9 +42,6 @@ class Bottleneck(nn.Module):
     def forward(self, x):
         identity = x
 
-        print('1', x.shape)
-
-
         out = self.conv1(x)
         out = self.bn1(out)
         out = self.relu(out)
@@ -61,5 +58,7 @@ class Bottleneck(nn.Module):
 
         out += identity
         out = self.relu(out)
+
+        return out
 
 

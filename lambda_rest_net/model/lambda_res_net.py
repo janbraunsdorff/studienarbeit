@@ -92,9 +92,8 @@ class LambdaResNet(nn.Module):
         x = self.relu(x)
         x = self.maxpool(x)
 
-        print(x)
-
         x = self.layer1(x)
+        print('###########################')
         x = self.layer2(x)
         x = self.layer3(x)
         x = self.layer4(x)

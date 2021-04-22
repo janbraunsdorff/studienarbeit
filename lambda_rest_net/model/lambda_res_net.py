@@ -25,7 +25,7 @@ class LambdaResNet(nn.Module):
         self.layer3 = self._make_layer(LambdaBottleneck, 256, layers[2], stride=2, dilate=replace_stride_with_dilation[1])
         #self.layer4 = self._make_layer(LambdaBottleneck, 512, layers[3], stride=2, dilate=replace_stride_with_dilation[2])
 
-        self.fc = nn.Linear(512 * LambdaBottleneck.expansion, num_classes)
+        self.fc = nn.Linear(256 * LambdaBottleneck.expansion, num_classes)
 
 
         # Functions

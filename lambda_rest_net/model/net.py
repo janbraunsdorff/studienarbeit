@@ -31,11 +31,11 @@ class Net(nn.Module):
 
 
     def build_regessor(self, in_features, out_features):
-        nn.Sequential([
+        nn.Sequential(
             nn.LeakyReLU(),
             nn.Dropout(),
             nn.Linear(in_features=in_features, out_features=out_features),
-        ])
+        )
 
 
     def forward(self, x, y):

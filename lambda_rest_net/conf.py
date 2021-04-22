@@ -1,6 +1,6 @@
 import torch
 
-batch_size = 16
+batch_size = 24
 lr = 1e-4
 num_epoch = 1_000
 

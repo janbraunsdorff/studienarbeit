@@ -77,7 +77,7 @@ def load_data(path, batch_size):
     return train_loader, val_loader
 
 
-def processImages(img_path, resize_to=500, reduce_to=380, out_to=256):
+def processImages(img_path, resize_to=750, reduce_to=500, out_to=299):
     img = cv2.imread(img_path)
     size_target = resize_to
     img = cv2.resize(img, (resize_to, resize_to), interpolation=cv2.INTER_LINEAR)

@@ -78,7 +78,6 @@ def load_data(path, batch_size):
 
 
 def processImages(img_path, resize_to=750, reduce_to=500, out_to=299):
-    print(resize_to, reduce_to, out_to)
     img = cv2.imread(img_path)
     size_target = resize_to
     img = cv2.resize(img, (resize_to, resize_to), interpolation=cv2.INTER_LINEAR)

@@ -108,4 +108,4 @@ class LambdaResNet(nn.Module):
 
 
 def lambda_resnet50(num_classes=1000, channel_in=3):
-    return LambdaResNet(Bottleneck, [1,2,4,2], num_classes=num_classes, channel_in=channel_in)
+    return LambdaResNet(Bottleneck, [3,4,6,3], num_classes=num_classes, channel_in=channel_in)

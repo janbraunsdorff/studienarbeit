@@ -19,13 +19,13 @@ class Net(nn.Module):
         self.activate = nn.ReLU()
 
         # Regressor
-        self.reg_1 = self.build_regessor(in_features=age_nurones+res_net_out, out_features=1000)
-        self.reg_2 = self.build_regessor(in_features=1000, out_features=1000)
-        self.reg_3 = self.build_regessor(in_features=1000, out_features=1000)
+        self.reg_1 = self.build_regessor(in_features=age_nurones+res_net_out, out_features=800)
+        self.reg_2 = self.build_regessor(in_features=800, out_features=500)
+        self.reg_3 = self.build_regessor(in_features=500, out_features=200)
 
 
         # Out 
-        self.out = nn.Linear(in_features=1000, out_features=1)
+        self.out = nn.Linear(in_features=200, out_features=1)
 
 
 

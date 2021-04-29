@@ -116,7 +116,8 @@ def img_to_tensor(base_path):
     t_img = torch.tensor(arr)
     t_img_normalize = t_img.unsqueeze(0)
 
-    return t_img_normalize
+
+    return t_img_normalize / 255.0
 
 
 def create_date_point(id, age, path, sex):

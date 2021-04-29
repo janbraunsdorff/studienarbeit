@@ -38,8 +38,6 @@ class Net(nn.Module):
 
 
     def forward(self, x, y):
-        x = x.float()
-        x = x / 255.0
         y = y.float()
         x = self.conv_in(x)
         x = self.resnet(x)

@@ -7,8 +7,8 @@ class Net(nn.Module):
         super(Net, self).__init__()
         # Paramter
         res_net_in = 32
-        res_net_out = 2000
-        age_nurones = 96
+        res_net_out = 2048
+        age_nurones = 64
 
         # Image
         self.conv_in = nn.Conv2d(in_channels=in_channels, out_channels=res_net_in, kernel_size=1, stride=1, bias=False)
@@ -20,18 +20,20 @@ class Net(nn.Module):
 
         # Regressor
         self.reg_1 = self.build_regessor(in_features=age_nurones+res_net_out, out_features=1500)
-        self.reg_2 = self.build_regessor(in_features=1500, out_features=1000)
+        self.reg_2 = self.build_regessor(in_features=1000, out_features=1000)
+        self.reg_3 = self.build_regessor(in_features=1000, out_features=1000)
 
 
         # Out 
         self.out = nn.Linear(in_features=1000, out_features=1)
 
 
+
     def build_regessor(self, in_features, out_features):
         return nn.Sequential(
+            nn.Linear(in_features=in_features, out_features=out_features),
             nn.LeakyReLU(),
             nn.Dropout(),
-            nn.Linear(in_features=in_features, out_features=out_features),
         )
 
 
@@ -43,12 +45,13 @@ class Net(nn.Module):
         x = self.resnet(x)
 
         y = self.age(y.view(-1, 1))
-        y = self.activate(y)
 
         x = torch.cat((x, y), 1)
+        x = self.activate(x)
 
         x = self.reg_1(x)
         x = self.reg_2(x)
+        x = self.reg_3(x)
 
         x = self.out(x)
         return x

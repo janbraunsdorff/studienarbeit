@@ -31,7 +31,7 @@ def pre():
     benchmark(process_store_image_val, path_to_validation_annotation, path_to_validatoin_data, path)
     sys.stdout.flush()
 
-pre()
+#pre()
 
 print('init model...', end=' ')
 model = Net(in_channels=1)

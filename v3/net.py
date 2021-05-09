@@ -15,9 +15,8 @@ class Identity(nn.Module):
     def forward(self, x):
         return x
 
-def _transform_input(self, x: Tensor) -> Tensor:
-        if self.transform_input:
-            x = (x * 2) - 1
+def _transform_input(x: Tensor) -> Tensor:
+        x = (x * 2) - 1
         return x
 
 

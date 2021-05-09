@@ -147,7 +147,7 @@ class MnistModel(nn.Module):
 
 def fit(epochs, lr, betas,  model, train_loader, val_loader, stop_after, opt_func=torch.optim.Adam):
     optimizer = opt_func(model.parameters(), lr=lr,  betas=betas)
-    sheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer, mode='min', factor=0.8, patience=5, threshold=0.001, threshold_mode='abs', cooldown=0, min_lr=0, eps=1e-10, verbose=False)
+    sheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer, mode='min', factor=0.1, patience=5, threshold=0.001, threshold_mode='rel', cooldown=0, min_lr=0, eps=1e-10, verbose=False)
     history = []
 
     min_loss = 0

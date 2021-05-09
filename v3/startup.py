@@ -41,6 +41,7 @@ def run(batch_size, lr, epochs, betas, stop_after):
     print("first guess: ", end="")
     model.eval()
     print("wait 3 secondes: ", end="")
+    sys.stdout.flush()
     time.sleep(3)
     print("waiting complete")
     result = evaluate(model, val_loader)

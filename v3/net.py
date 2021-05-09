@@ -27,7 +27,8 @@ class MnistModel(nn.Module):
         self.inception_v3.fc = Identity()                                                               # remove classification layer
         self.inception_v3.Conv2d_1a_3x3.conv = nn.Conv2d(1, 32, 3,2)                                    # remove color channels
         self.inception_v3._transform_input = _transform_input                                           # change normalisation
-        # self.Mixed_5d = Identity()
+        self.Mixed_5d = Identity()
+        self.Mixed_6a = Identity()
 
         self.dense32 = nn.Linear(1, 64)
 

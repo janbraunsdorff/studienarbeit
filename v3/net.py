@@ -1,6 +1,7 @@
 import torch
 import torch.nn as nn
 import numpy as np
+from torch import Tensor
 
 import sys
 from v3.mussure import benchmark

@@ -90,6 +90,8 @@ def processImages(img_path,  size_target=256):
     lab = cv2.merge(lab_planes)
     bgr = cv2.cvtColor(lab, cv2.COLOR_LAB2BGR)
 
+    bgr = cv2.cvtColor(bgr, cv2.COLOR_BGR2GRAY)
+
     x = y = (size_target - 299) // 2
 
     h = w = 299
@@ -104,6 +106,8 @@ def img_to_tensor(base_path):
     arr = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     t_img = torch.tensor(arr)
     t_img_normalize = t_img.permute(2, 0, 1)
+
+    print(t_img_normalize.shape)
 
     return t_img_normalize
 

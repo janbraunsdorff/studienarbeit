@@ -104,11 +104,7 @@ def img_to_tensor(base_path):
     arr = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     t_img = torch.tensor(arr).unsqueeze(0)
     print(t_img.shape)
-    t_img_normalize = t_img.permute(2, 0, 1)
-
-    print(t_img_normalize.shape)
-
-    return t_img_normalize
+    return t_img
 
 
 def create_date_point(id, age, path, sex):

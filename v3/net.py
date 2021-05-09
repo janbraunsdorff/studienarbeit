@@ -53,6 +53,7 @@ class MnistModel(nn.Module):
 
     def forward(self, x, y):
         x = x.float()
+        x = x / 255.0
         x = self.agument(x)
 
         y = y.float()

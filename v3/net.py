@@ -14,6 +14,11 @@ class Identity(nn.Module):
     def forward(self, x):
         return x
 
+def _transform_input(self, x: Tensor) -> Tensor:
+        if self.transform_input:
+            x = (x * 2) - 1
+        return x
+
 
 class MnistModel(nn.Module):
     def __init__(self, device):

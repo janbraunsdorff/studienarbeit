@@ -29,6 +29,7 @@ class MnistModel(nn.Module):
         self.inception_v3._transform_input = _transform_input                                           # change normalisation
         self.Mixed_5d = Identity()
         self.Mixed_6a = Identity()
+        self.Mixed_6b = Identity()
 
         self.dense32 = nn.Linear(1, 64)
 

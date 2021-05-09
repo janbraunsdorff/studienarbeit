@@ -103,7 +103,6 @@ def img_to_tensor(base_path):
     img = processImages(img_path=base_path)
     arr = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     t_img = torch.tensor(arr).unsqueeze(0)
-    print(t_img.shape)
     return t_img
 
 

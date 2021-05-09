@@ -20,7 +20,8 @@ class MnistModel(nn.Module):
         super().__init__()
         self.inception_v3 = torch.hub.load('pytorch/vision:v0.9.0', 'inception_v3', pretrained=True)
         self.inception_v3.fc = Identity()
-   
+        self.inception_v3.Conv2d_1a_3x3.conv = nn.Conv2d(1, 32, 3,2)
+
         self.dense32 = nn.Linear(1, 64)
 
         self.dense1000_1 = nn.Linear(2048+64, 1000)

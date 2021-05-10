@@ -9,7 +9,7 @@ np.random.seed(0)
 torch.manual_seed(0)
 random.seed(0)
 
-# clear && nvidia-smi && free
+# watch -n 1 "nvidia-smi && free && tail log.txt"
 # git pull && clear && python3 runner.py | tee log.txt
 
 
@@ -20,7 +20,7 @@ print('Start Trainig')
 sys.stdout.flush()
 
 config= [
-    [48, (0.9, 0.999), 1e-4, 100_000, 25],
+    [32, (0.9, 0.999), 1e-4, 100_000, 25],
 ]
 
 for c in config:

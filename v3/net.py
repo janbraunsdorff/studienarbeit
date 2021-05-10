@@ -28,9 +28,11 @@ class MnistModel(nn.Module):
         #self.inception_v3 = torch.hub.load('pytorch/vision:v0.9.0', 'inception_v3', pretrained=True)
         #self.inception_v3.fc = Identity()                                                               # remove classification layer
 
-        #self.inception_v3 = Inception(torch.hub.load('pytorch/vision:v0.9.0', 'inception_v3', pretrained=True))
+        self.inception_v3 = Inception(torch.hub.load('pytorch/vision:v0.9.0', 'inception_v3', pretrained=True))
 
-        self.inception_v3 = InceptionRaw()
+        #self.inception_v3 = InceptionRaw()
+
+        
 
         self.dense32 = nn.Linear(1, 64)
 

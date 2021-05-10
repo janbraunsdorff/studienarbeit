@@ -117,7 +117,7 @@ class IncA(nn.Module):
         self.branch3x3dbl_2 = BasicConv2d(64, 96, kernel_size=3, padding=1, weights=model.branch3x3dbl_2.conv.weight)
         self.branch3x3dbl_3 = BasicConv2d(96, 96, kernel_size=3, padding=1, weights=model.branch3x3dbl_3.conv.weight)
 
-        self.branch_pool = BasicConv2d(in_channels, pool_features, kernel_size=1)
+        self.branch_pool = BasicConv2d(in_channels, pool_features, kernel_size=1, weights=model.branch_pool.conv.weight)
 
     def _forward(self, x: Tensor) -> List[Tensor]:
         branch1x1 = self.branch1x1(x)

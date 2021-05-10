@@ -143,11 +143,11 @@ class IncB(nn.Module):
 
     def __init__(self, in_channels: int, model: InceptionB) -> None:
         super(IncB, self).__init__()
-        self.branch3x3 = BasicConv2d(in_channels, 384, kernel_size=3, stride=2, weight=model.branch3x3.conv.weight)
+        self.branch3x3 = BasicConv2d(in_channels, 384, kernel_size=3, stride=2, weights=model.branch3x3.conv.weight)
 
-        self.branch3x3dbl_1 = BasicConv2d(in_channels, 64, kernel_size=1, weight=model.branch3x3dbl_1.conv.weight)
-        self.branch3x3dbl_2 = BasicConv2d(64, 96, kernel_size=3, padding=1, weight=model.branch3x3dbl_2.conv.weight)
-        self.branch3x3dbl_3 = BasicConv2d(96, 96, kernel_size=3, stride=2, weight=model.branch3x3dbl_3.conv.weight)
+        self.branch3x3dbl_1 = BasicConv2d(in_channels, 64, kernel_size=1, weights=model.branch3x3dbl_1.conv.weight)
+        self.branch3x3dbl_2 = BasicConv2d(64, 96, kernel_size=3, padding=1, weights=model.branch3x3dbl_2.conv.weight)
+        self.branch3x3dbl_3 = BasicConv2d(96, 96, kernel_size=3, stride=2, weights=model.branch3x3dbl_3.conv.weight)
 
     def _forward(self, x: Tensor) -> List[Tensor]:
         branch3x3 = self.branch3x3(x)

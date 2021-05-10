@@ -37,7 +37,8 @@ class Inception(nn.Module):
 
         # Block E
         # self.Mixed_7b = IncE(1280, model=v3.Mixed_7b)
-        self.Mixed_7c = IncE(2048, model=v3.Mixed_7c)
+        # self.Mixed_7c = IncE(2048, model=v3.Mixed_7c)
+        self.Mixed_7c = IncE(1280, model=v3.Mixed_7c)
 
         # out
         self.avgpool = nn.AdaptiveAvgPool2d((1, 1))

@@ -24,10 +24,10 @@ class Inception(nn.Module):
         #self.Mixed_5d = IncA(288, pool_features=64, model=v3.Mixed_5d)
 
         # Block B
-        #self.Mixed_6a = IncB(288, model=v3.Mixed_6a)
+        self.Mixed_6a = IncB(288, model=v3.Mixed_6a)
 
         # Block C
-        self.Mixed_6b = IncC(768, channels_7x7=128, model=v3.Mixed_6b)
+        #self.Mixed_6b = IncC(768, channels_7x7=128, model=v3.Mixed_6b)
         self.Mixed_6c = IncC(768, channels_7x7=160, model=v3.Mixed_6c)
         self.Mixed_6d = IncC(768, channels_7x7=160, model=v3.Mixed_6d)
         self.Mixed_6e = IncC(768, channels_7x7=192, model=v3.Mixed_6e)
@@ -71,10 +71,10 @@ class Inception(nn.Module):
         # x = self.Mixed_5d(x)
 
         # N x 288 x 35 x 35
-        #x = self.Mixed_6a(x)
+        x = self.Mixed_6a(x)
 
         # N x 768 x 17 x 17
-        x = self.Mixed_6b(x)
+        # x = self.Mixed_6b(x)
         # N x 768 x 17 x 17
         x = self.Mixed_6c(x)
         # N x 768 x 17 x 17

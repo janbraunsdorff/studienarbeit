@@ -30,6 +30,7 @@ class MnistModel(nn.Module):
         self.Mixed_5d = Identity()
         self.Mixed_6a = Identity()
         self.Mixed_6b = Identity()
+        self.Mixed_6c = Identity()
 
         self.dense32 = nn.Linear(1, 64)
 

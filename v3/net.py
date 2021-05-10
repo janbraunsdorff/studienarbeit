@@ -31,11 +31,11 @@ class MnistModel(nn.Module):
         self.dense32 = nn.Linear(1, 64)
 
         self.dense1000_1 = nn.Linear(2048+64, 1000)
-        self.dense1000_2 = nn.Linear(1000, 1000)
+        #self.dense1000_2 = nn.Linear(1000, 1000)
         self.dense1000_4 = nn.Linear(1000, 1)
 
         self.drop_1 = nn.Dropout()
-        self.drop_2 = nn.Dropout()
+        #self.drop_2 = nn.Dropout()
         self.drop_3 = nn.Dropout()
 
 
@@ -79,9 +79,9 @@ class MnistModel(nn.Module):
         x = self.relu(x)
         x = self.drop_1(x)
 
-        x = self.dense1000_2(x)
-        x = self.relu(x)
-        x = self.drop_2(x)
+        #x = self.dense1000_2(x)
+        #x = self.relu(x)
+        #x = self.drop_2(x)
 
         x = self.dense1000_4(x)
         x = self.relu(x)

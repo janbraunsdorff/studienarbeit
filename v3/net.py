@@ -5,6 +5,7 @@ from torch import Tensor
 
 import sys
 from v3.mussure import benchmark
+from v3.inception_small import Inception
 import torchvision.transforms as transforms
 
 
@@ -23,14 +24,9 @@ def _transform_input(x: Tensor) -> Tensor:
 class MnistModel(nn.Module):
     def __init__(self, device):
         super().__init__()
-        self.inception_v3 = torch.hub.load('pytorch/vision:v0.9.0', 'inception_v3', pretrained=True)
-        self.inception_v3.fc = Identity()                                                               # remove classification layer
-        self.inception_v3.Conv2d_1a_3x3.conv = nn.Conv2d(1, 32, 3,2)                                    # remove color channels
-        self.inception_v3._transform_input = _transform_input                                           # change normalisation
-        self.Mixed_5d = Identity()
-        self.Mixed_6a = Identity()
-        self.Mixed_6b = Identity()
-        self.Mixed_6c = Identity()
+        #self.inception_v3 = torch.hub.load('pytorch/vision:v0.9.0', 'inception_v3', pretrained=True)
+        #self.inception_v3.fc = Identity()                                                               # remove classification layer
+        self.inception_v3 = Inception(torch.hub.load('pytorch/vision:v0.9.0', 'inception_v3', pretrained=True))
 
         self.dense32 = nn.Linear(1, 64)
 

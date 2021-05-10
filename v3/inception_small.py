@@ -36,9 +36,8 @@ class Inception(nn.Module):
         self.Mixed_7a = IncD(768, model=v3.Mixed_7a)
 
         # Block E
-        # self.Mixed_7b = IncE(1280, model=v3.Mixed_7b)
-        # self.Mixed_7c = IncE(2048, model=v3.Mixed_7c)
-        self.Mixed_7c = IncE(1280)
+        self.Mixed_7b = IncE(1280, model=v3.Mixed_7b)
+        self.Mixed_7c = IncE(2048, model=v3.Mixed_7c)
 
         # out
         self.avgpool = nn.AdaptiveAvgPool2d((1, 1))
@@ -86,7 +85,7 @@ class Inception(nn.Module):
         # N x 768 x 17 x 17
         x = self.Mixed_7a(x)
         # N x 1280 x 8 x 8
-        # x = self.Mixed_7b(x)
+        x = self.Mixed_7b(x)
         # N x 2048 x 8 x 8
         x = self.Mixed_7c(x)
 
@@ -257,14 +256,16 @@ class IncE(nn.Module):
     def _forward(self, x: Tensor) -> List[Tensor]:
         branch1x1 = self.branch1x1(x)
 
-        branch3x3 = self.branch3x3_1(x)
+        # branch3x3 = self.branch3x3_1(x)
+        branch3x3 = x
         branch3x3 = [
             self.branch3x3_2a(branch3x3),
             self.branch3x3_2b(branch3x3),
         ]
         branch3x3 = torch.cat(branch3x3, 1)
 
-        branch3x3dbl = self.branch3x3dbl_1(x)
+        # branch3x3dbl = self.branch3x3dbl_1(x)
+        branch3x3dbl = x
         branch3x3dbl = self.branch3x3dbl_2(branch3x3dbl)
         branch3x3dbl = [
             self.branch3x3dbl_3a(branch3x3dbl),

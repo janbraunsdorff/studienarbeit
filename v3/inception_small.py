@@ -3,6 +3,7 @@ import torch.nn as nn
 from torch import Tensor
 import torch.nn.functional as F
 from torchvision.models.inception import Inception3, InceptionA, InceptionB, InceptionC, InceptionD, InceptionE
+from typing import Callable, Any, Optional, Tuple, List
 
 
 class Inception(nn.Module):

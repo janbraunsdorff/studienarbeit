@@ -85,7 +85,7 @@ class Inception(nn.Module):
         # N x 768 x 17 x 17
         x = self.Mixed_7a(x)
         # N x 1280 x 8 x 8
-        x = self.Mixed_7b(x)
+        # x = self.Mixed_7b(x)
         # N x 2048 x 8 x 8
         x = self.Mixed_7c(x)
 
@@ -263,7 +263,7 @@ class IncE(nn.Module):
         ]
         branch3x3 = torch.cat(branch3x3, 1)
 
-        ranch3x3dbl = self.branch3x3dbl_1(x)
+        branch3x3dbl = self.branch3x3dbl_1(x)
         branch3x3dbl = self.branch3x3dbl_2(branch3x3dbl)
         branch3x3dbl = [
             self.branch3x3dbl_3a(branch3x3dbl),

@@ -286,7 +286,7 @@ class BasicConv2d(nn.Module):
         super(BasicConv2d, self).__init__()
         self.conv = nn.Conv2d(in_channels, out_channels, bias=False, kernel_size=kernel_size, stride=stride, padding=padding)
         print(weights)
-        if weights:
+        if not weights is None:
             self.conv.weight = weights
         self.bn = nn.BatchNorm2d(out_channels, eps=0.001)
 

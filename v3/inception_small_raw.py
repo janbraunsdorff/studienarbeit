@@ -106,7 +106,7 @@ class InceptionRaw(nn.Module):
 
 class IncA(nn.Module):
 
-    def __init__(self, in_channels: int, pool_features: int, model: InceptionA) -> None:
+    def __init__(self, in_channels: int, pool_features: int) -> None:
         super(IncA, self).__init__()
         self.branch1x1 = BasicConv2d(in_channels, 64, kernel_size=1)
 
@@ -141,7 +141,7 @@ class IncA(nn.Module):
 
 class IncB(nn.Module):
 
-    def __init__(self, in_channels: int, model: InceptionB) -> None:
+    def __init__(self, in_channels: int) -> None:
         super(IncB, self).__init__()
         self.branch3x3 = BasicConv2d(in_channels, 384, kernel_size=3, stride=2)
 
@@ -167,7 +167,7 @@ class IncB(nn.Module):
 
 class IncC(nn.Module):
 
-    def __init__(self, in_channels: int, channels_7x7: int, model: InceptionC) -> None:
+    def __init__(self, in_channels: int, channels_7x7: int) -> None:
         super(IncC, self).__init__()
         self.branch1x1 = BasicConv2d(in_channels, 192, kernel_size=1)
 
@@ -209,7 +209,7 @@ class IncC(nn.Module):
 
 class IncD(nn.Module):
 
-    def __init__(self, in_channels: int, model: InceptionD) -> None:
+    def __init__(self, in_channels: int) -> None:
         super(IncD, self).__init__()
         self.branch3x3_1 = BasicConv2d(in_channels, 192, kernel_size=1)
         self.branch3x3_2 = BasicConv2d(192, 320, kernel_size=3, stride=2)
@@ -238,7 +238,7 @@ class IncD(nn.Module):
 
 class IncE(nn.Module):
 
-    def __init__( self, in_channels: int, model: InceptionE) -> None:
+    def __init__( self, in_channels: int) -> None:
         super(IncE, self).__init__()
         self.branch1x1 = BasicConv2d(in_channels, 320, kernel_size=1)
 

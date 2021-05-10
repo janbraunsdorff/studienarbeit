@@ -10,7 +10,7 @@ torch.manual_seed(0)
 random.seed(0)
 
 # watch -n 1 "nvidia-smi && free && tail log.txt"
-# git pull && clear && python3 runner.py | tee log.txt
+# rm log.txt && git pull && clear && python3 runner.py | tee log.txt
 
 
 #pre_process()

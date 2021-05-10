@@ -65,8 +65,9 @@ class MnistModel(nn.Module):
 
         y = y.float()
         x = self.inception_v3(x)
-        if self.training:
-            x = x.logits
+
+        #if self.training:
+        #    x = x.logits
         y = self.dense32(y.unsqueeze(1).float())
 
 

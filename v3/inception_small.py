@@ -1,6 +1,6 @@
 import torch
 import torch.nn as nn
-import torch.functional.F as F
+import torch.nn.functional as F
 from torchvision.models.inception import Inception3, InceptionA, InceptionB, InceptionC, InceptionD, InceptionE
 from torch.nn.parameter import Paramter
 

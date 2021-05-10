@@ -6,6 +6,7 @@ from torch import Tensor
 import sys
 from v3.mussure import benchmark
 from v3.inception_small import Inception
+from v3.inception_small_raw import InceptionRaw
 import torchvision.transforms as transforms
 
 
@@ -26,7 +27,10 @@ class MnistModel(nn.Module):
         super().__init__()
         #self.inception_v3 = torch.hub.load('pytorch/vision:v0.9.0', 'inception_v3', pretrained=True)
         #self.inception_v3.fc = Identity()                                                               # remove classification layer
-        self.inception_v3 = Inception(torch.hub.load('pytorch/vision:v0.9.0', 'inception_v3', pretrained=True))
+
+        #self.inception_v3 = Inception(torch.hub.load('pytorch/vision:v0.9.0', 'inception_v3', pretrained=True))
+
+        self.inception_v3 = InceptionRaw()
 
         self.dense32 = nn.Linear(1, 64)
 

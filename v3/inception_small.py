@@ -103,7 +103,6 @@ class Inception(nn.Module):
 
     def _transform_input(self, x):
         # x = (x * 2) - 1
-        print('new')
         x = x * (self.std / 0.5) + (self.mean - 0.5) / 0.5
         return x
 

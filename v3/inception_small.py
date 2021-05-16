@@ -43,9 +43,6 @@ class Inception(nn.Module):
         self.avgpool = nn.AdaptiveAvgPool2d((1, 1))
         self.dropout = nn.Dropout()
 
-        self.std = 0.5228018736810739
-        self.mean = 0.2772987272627915
-
 
     def forward(self, x):
         # N x 3 x 299 x 299
@@ -102,8 +99,7 @@ class Inception(nn.Module):
         return x
 
     def _transform_input(self, x):
-        # x = (x * 2) - 1
-        x = x * (self.std / 0.5) + (self.mean - 0.5) / 0.5
+        x = (x * 2) - 1
         return x
 
 

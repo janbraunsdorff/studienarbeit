@@ -11,6 +11,7 @@ random.seed(0)
 
 # watch -n 1 "nvidia-smi && free && tail log.txt"
 # rm log.txt && git pull && clear && python3 runner.py | tee log.txt
+# git pull && clear && nohub python3 runner.py
 
 
 #pre_process()
@@ -20,7 +21,7 @@ print('Start Trainig')
 sys.stdout.flush()
 
 config= [
-    [8, (0.9, 0.999), 1e-4, 100_000, 25],
+    [8, (0.9, 0.999), 1e-4, 100_000, 100_000],
 ]
 
 for c in config:

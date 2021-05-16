@@ -43,8 +43,6 @@ class InceptionRaw(nn.Module):
         self.avgpool = nn.AdaptiveAvgPool2d((1, 1))
         self.dropout = nn.Dropout()
 
-
-
     def forward(self, x):
         # N x 3 x 299 x 299
         x = self._transform_input(x)

@@ -8,7 +8,7 @@ def run(model_path, image_path, sex):
     model = torch.load(model_path, map_location=torch.device('cpu'))
     model.eval()
 
-    img  = img_to_tensor(image_path).unsqueeze(0)
+    img  = img_to_tensor(image_path)
     gender = torch.Tensor([sex]).squeeze(0)
 
     print(img.shape, gender.shape)

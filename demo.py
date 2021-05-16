@@ -18,7 +18,7 @@ def run(model_path, image_path, sex):
     gender = torch.Tensor([sex])
 
     print('prediction: ', end='')
-    print(model(img, gender).item())
+    print(model(img, gender).item(), 'Monate')
 
 
 

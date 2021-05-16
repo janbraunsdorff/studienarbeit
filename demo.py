@@ -26,7 +26,7 @@ def run(model_path, image_path, sex):
 
 
 if __name__ == "__main__":
-    print(sys.argv)
+    _, img, sex = sys.argv
 
-    run('./model/v3-small-row-11.pth', '../data/boneage-test-dataset/4360.png', 0)
+    run('./model/v3-small-row-11.pth', img, sex)
     print('done')

@@ -1,5 +1,6 @@
 import torch
 import torchvision
+import sys
 
 
 from v3.processing import img_to_tensor
@@ -25,5 +26,7 @@ def run(model_path, image_path, sex):
 
 
 if __name__ == "__main__":
+    print(sys.argv)
+
     run('./model/v3-small-row-11.pth', '../data/boneage-test-dataset/4360.png', 0)
     print('done')

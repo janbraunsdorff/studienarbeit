@@ -28,5 +28,5 @@ def run(model_path, image_path, sex):
 if __name__ == "__main__":
     _, img, sex = sys.argv
 
-    run('./model/v3-small-row-11.pth', img, sex)
+    run('./model/v3-small-row-11.pth', img, int(sex))
     print('done')

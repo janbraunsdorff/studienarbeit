@@ -76,6 +76,8 @@ class MnistModel(nn.Module):
         #    x = x.logits
         y = self.dense32(y.unsqueeze(1).float())
 
+        print(x.shape, y.shape)
+
 
         x = torch.cat((x, y), 1)
 

@@ -1,6 +1,7 @@
 import torch
 import torchvision
 
+
 from v3.processing import img_to_tensor
 
 
@@ -18,7 +19,7 @@ def run(model_path, image_path, sex):
     gender = torch.Tensor([sex])
 
     print('prediction: ', end='')
-    print(model(img, gender).item(), 'Monate')
+    print(round(model(img, gender).item(), 3), 'Monate')
 
 
 

@@ -12,7 +12,7 @@ def run(model_path, image_path, sex):
     gender = torch.Tensor([sex])
 
     print(img.shape, gender.shape)
-    print(model(img, gender))
+    print(model(img, gender).item)
 
 
 
